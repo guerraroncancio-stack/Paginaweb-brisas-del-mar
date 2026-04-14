@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,13 +22,13 @@ body{
     overflow-x:hidden;
 }
 
-/* TOP BAR - PERFECTO EN TODOS DISPOSITIVOS */
+/* TOP BAR */
 .topbar{
     position:fixed;
     top:0;
     left:0;
     width:100%;
-    padding:12px 20px;
+    padding:12px 15px;
     background:#020617;
     display:flex;
     justify-content:space-between;
@@ -37,15 +36,13 @@ body{
     z-index:1000;
     font-size:14px;
     border-bottom:1px solid #1e293b;
-    box-shadow:0 2px 10px rgba(0,0,0,0.3);
 }
 
 .role-badge{
     background:#22c55e;
-    padding:6px 12px;
-    border-radius:12px;
+    padding:5px 10px;
+    border-radius:10px;
     font-size:12px;
-    font-weight:500;
 }
 
 .role-badge.cocinero{background:#3b82f6;}
@@ -55,18 +52,18 @@ body{
 .page{
     display:none;
     min-height:100vh;
-    padding-top:70px;
+    padding-top:60px;
 }
 .active{display:block;}
 
-/* LOGIN - FULL RESPONSIVE */
+/* LOGIN */
 .login{
     position:fixed;
     top:0;
     left:0;
     width:100%;
     height:100dvh;
-    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+    background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
     url('https://api.dix.lat/media/img_1776131911102_jbdcIitE5.jpg');
     background-size:cover;
     background-position:center;
@@ -75,65 +72,51 @@ body{
     justify-content:center;
     align-items:center;
     z-index:999;
-    padding:20px;
+    padding:15px;
 }
 
 .login-box{
     width:100%;
-    max-width:380px;
+    max-width:350px;
     background:rgba(30,41,59,0.95);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    padding:35px 25px;
-    border-radius:20px;
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    padding:25px;
+    border-radius:15px;
     text-align:center;
     color:white;
-    box-shadow:0 20px 40px rgba(0,0,0,0.5);
-    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
 input{
+    padding:12px;
     width:100%;
-    padding:15px 18px;
-    margin:12px 0;
+    margin-top:10px;
     border:none;
-    border-radius:12px;
+    border-radius:10px;
     font-size:16px;
     background:#334155;
     color:white;
-    outline:none;
 }
 
-input::placeholder{
-    color:#94a3b8;
-}
-
-/* BOTONES - TOUCH FRIENDLY */
+/* BOTONES */
 button{
-    width:100%;
-    padding:15px;
-    margin:8px 0;
+    margin-top:10px;
+    padding:12px;
     border:none;
-    border-radius:12px;
-    background:linear-gradient(135deg, #22c55e, #16a34a);
+    border-radius:10px;
+    background:#22c55e;
     color:white;
     cursor:pointer;
-    font-size:16px;
     font-weight:500;
-    transition:all 0.3s ease;
-    min-height:50px;
+    font-size:16px;
     touch-action:manipulation;
-}
-
-button:hover, button:active{
-    transform:translateY(-2px);
-    box-shadow:0 8px 25px rgba(34,197,94,0.4);
 }
 
 /* HERO */
 .hero{
     height:100vh;
-    background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.9)),
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),
     url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092');
     background-size:cover;
     background-position:center;
@@ -142,66 +125,29 @@ button:hover, button:active{
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:20px;
-}
-
-.hero h1{
-    font-size:clamp(2rem, 5vw, 3.5rem);
-    margin-bottom:30px;
-    background:linear-gradient(135deg, #22c55e, #3b82f6);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
 }
 
 /* MENU */
-.menu{
-    padding:25px 20px;
-    max-width:1200px;
-    margin:0 auto;
-}
+.menu{padding:20px;}
 
-.menu h2{
-    text-align:center;
-    margin:20px 0 40px 0;
-    font-size:clamp(1.5rem, 4vw, 2.2rem);
-}
-
-/* CARDS - PERFECTAS EN PC/MOVIL */
 .card{
     background:#1e293b;
-    padding:25px 20px;
-    margin-bottom:20px;
-    border-radius:16px;
+    padding:20px;
+    margin-bottom:15px;
+    border-radius:15px;
     border:1px solid #334155;
-    transition:all 0.3s ease;
-    position:relative;
-    overflow:hidden;
+    transition: transform 0.3s;
 }
 
-.card::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:4px;
-    background:linear-gradient(90deg, #22c55e, #3b82f6);
-}
-
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 40px rgba(0,0,0,0.3);
-}
+.card:hover{transform:translateY(-3px);}
 
 .card h3{
-    font-size:clamp(1.1rem, 3vw, 1.4rem);
-    margin-bottom:8px;
-    color:#f1f5f9;
+    margin-bottom:5px;
+    font-size:18px;
 }
 
 .card p{
-    font-size:clamp(1.4rem, 4vw, 2rem);
+    font-size:20px;
     color:#22c55e;
     font-weight:700;
     margin:10px 0;
@@ -209,72 +155,46 @@ button:hover, button:active{
 
 .status{
     display:inline-block;
-    padding:8px 16px;
-    border-radius:20px;
-    margin:10px 0;
-    font-size:14px;
-    font-weight:600;
+    padding:6px 12px;
+    border-radius:10px;
+    margin:5px 0;
+    font-size:13px;
+    font-weight:500;
 }
 
-.available{background:linear-gradient(135deg, #22c55e, #16a34a);}
-.soldout{background:linear-gradient(135deg, #ef4444, #dc2626);}
+.available{background:#22c55e;}
+.soldout{background:#ef4444;}
 
 .toggle{
     display:none;
-    background:linear-gradient(135deg, #f59e0b, #d97706);
+    background:#f59e0b;
     width:100%;
-    padding:12px;
-    margin:10px 0;
-    font-size:14px;
+    padding:10px;
+    margin:8px 0;
 }
 
 .order-btn{
-    background:linear-gradient(135deg, #3b82f6, #2563eb);
+    background:#3b82f6;
     width:100%;
-    padding:14px;
-    margin:10px 0;
-    font-size:15px;
-    font-weight:600;
+    padding:12px;
+    margin:8px 0;
 }
 
 /* PANEL */
-.panel{
-    padding:25px 20px;
-    background:#020617;
-    min-height:100vh;
-}
+.panel{padding:20px;background:#020617;}
 
-.panel h2{
-    text-align:center;
-    margin-bottom:30px;
-    font-size:clamp(1.5rem, 4vw, 2rem);
-}
-
-/* PEDIDOS */
 .pedido{
-    background:linear-gradient(135deg, #334155, #1e293b);
-    padding:20px;
-    margin-bottom:15px;
-    border-radius:16px;
-    border-left:4px solid #22c55e;
-    transition:all 0.3s ease;
-}
-
-.pedido:hover{
-    transform:translateX(5px);
-    box-shadow:0 10px 30px rgba(0,0,0,0.4);
-}
-
-.status-btn{
-    width:auto !important;
-    padding:10px 20px !important;
-    margin:5px;
+    background:#334155;
+    padding:15px;
+    margin-bottom:10px;
     border-radius:10px;
-    font-size:14px;
 }
 
 .delete-btn{
-    background:linear-gradient(135deg, #ef4444, #dc2626) !important;
+    background:#ef4444;
+    margin-top:5px;
+    width:100%;
+    padding:8px;
 }
 
 /* MODAL */
@@ -285,80 +205,62 @@ button:hover, button:active{
     left:0;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.9);
+    background:rgba(0,0,0,0.8);
     display:flex;
     justify-content:center;
     align-items:center;
-    z-index:1001;
-    backdrop-filter:blur(10px);
+    z-index:1000;
 }
 
 .modal-box{
-    background:linear-gradient(135deg, #1e293b, #0f172a);
-    padding:35px 25px;
-    border-radius:20px;
+    background:#1e293b;
+    padding:25px;
+    border-radius:15px;
     text-align:center;
     width:90%;
-    max-width:400px;
-    border:1px solid rgba(255,255,255,0.1);
-    box-shadow:0 20px 60px rgba(0,0,0,0.7);
-}
-
-.modal-box h2{
-    color:#22c55e;
-    font-size:2rem;
-    margin:20px 0;
-    font-weight:700;
+    max-width:350px;
 }
 
 /* TOAST */
 .toast{
     position:fixed;
-    bottom:30px;
+    bottom:20px;
     left:50%;
     transform:translateX(-50%);
-    background:linear-gradient(135deg, #22c55e, #16a34a);
-    padding:15px 25px;
-    border-radius:15px;
+    background:#22c55e;
+    padding:12px 20px;
+    border-radius:10px;
     display:none;
-    z-index:1002;
-    box-shadow:0 10px 30px rgba(34,197,94,0.4);
-    font-weight:500;
-    min-width:280px;
-    max-width:90vw;
+    z-index:1001;
 }
 
-/* 🔥 RESPONSIVE - MÓVIL/PC/TABLET PERFECTO */
+/* 🔥 RESPONSIVE COMPLETO - iOS/Android/PC */
 @media (max-width:768px){
-    .topbar{padding:12px 15px; font-size:13px;}
-    .login-box{padding:25px 20px;}
-    .menu{padding:20px 15px;}
-    .card{padding:20px 15px;}
-    .panel{padding:20px 15px;}
-    .pedido{padding:18px 15px;}
-    
-    button{min-height:48px; font-size:15px;}
-    .status{font-size:13px; padding:6px 12px;}
+    .topbar{padding:10px 12px; font-size:13px;}
+    .login-box{padding:20px; max-width:320px;}
+    .menu{padding:15px;}
+    .card{padding:18px 15px; margin-bottom:12px;}
+    .card h3{font-size:16px;}
+    .card p{font-size:18px;}
+    button{padding:14px; font-size:15px; min-height:48px;}
+    .toggle, .order-btn{display:block; width:100%; margin:8px 0;}
+    .pedido{padding:12px;}
 }
 
 @media (max-width:480px){
-    .hero h1{font-size:2rem;}
-    .menu h2{font-size:1.6rem;}
-    .card h3{font-size:1.1rem;}
-    .card p{font-size:1.6rem;}
-    .status{font-size:12px;}
-    
-    .topbar{padding:10px 12px;}
-    .login-box{padding:20px 15px; max-width:320px;}
+    .card{padding:15px;}
+    .card h3{font-size:15px;}
+    .card p{font-size:17px;}
+    .status{font-size:12px; padding:5px 10px;}
+    .topbar{padding:8px 10px;}
 }
 
 @media (min-width:1024px){
-    .menu{max-width:1000px;}
-    .card{display:grid; grid-template-columns:1fr auto auto; gap:15px; align-items:center;}
-    .card h3{margin-bottom:0;}
-    .card p{margin:0;}
-    .toggle,.order-btn{width:auto;}
-    .status{margin:0 10px 0 0;}
+    .menu{max-width:1000px; margin:0 auto;}
+    .card{display:grid; grid-template-columns:2fr 1fr auto auto; gap:15px; align-items:center;}
+    .card h3, .card p{margin:0;}
+    .toggle, .order-btn{width:auto; margin:0 5px;}
+    .status{margin-right:10px;}
 }
 </style>
 </head>
@@ -374,25 +276,26 @@ button:hover, button:active{
 <!-- LOGIN -->
 <div class="login" id="login">
     <div class="login-box">
-        <h2 style="margin-bottom:20px; font-size:1.8rem;">🐟 Ingresar</h2>
+        <h2 style="margin-bottom:15px;">🐟 Ingresar</h2>
         <input id="email" placeholder="Correo electrónico">
-        <button onclick="login()">🚀 Entrar</button>
+        <button onclick="login()">Entrar 🚀</button>
     </div>
 </div>
 
 <!-- HOME -->
 <section id="home" class="page active">
     <div class="hero">
-        <h1>𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 🐟</h1>
-        <button onclick="showPage('menuPage')" style="max-width:280px; margin:10px;">🍽️ Ver menú</button>
-        <button onclick="showPage('panelPage')" style="max-width:280px; margin:10px;">👨‍🍳 Cocina</button>
+        <h1 style="font-size:clamp(2rem,5vw,3rem); margin-bottom:30px;">𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 🐟</h1>
+        <button onclick="showPage('menuPage')" style="max-width:250px; margin:10px;">Ver menú 🍽️</button>
+        <button onclick="showPage('panelPage')" style="max-width:250px; margin:10px;">Cocina 👨‍🍳</button>
     </div>
 </section>
 
 <!-- MENU -->
 <section id="menuPage" class="page">
     <div class="menu">
-        <h2>🐟 𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 𝔐𝔢𝔫𝔲́</h2>
+
+        <h2 style="margin:20px 0 30px 0; text-align:center;">🐟 𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 𝔐𝔢𝔫𝔲́</h2>
 
         <div class="card">
             <h3>🐟 Cazuela de Mariscos</h3>
@@ -457,12 +360,13 @@ button:hover, button:active{
             <button class="toggle" onclick="toggle(8)">Cambiar estado</button>
             <button class="order-btn" onclick="pedir('Mapará en Salsa',24000)">🛒 Pedir</button>
         </div>
+
     </div>
 </section>
 
 <!-- PANEL -->
 <section id="panelPage" class="page panel">
-    <h2>👨‍🍳 Pedidos en Cocina</h2>
+    <h2 style="margin-bottom:20px;">Pedidos 👨‍🍳</h2>
     <div id="listaPedidos"></div>
 </section>
 
@@ -470,7 +374,7 @@ button:hover, button:active{
 <div id="modalPago">
     <div class="modal-box">
         <h3>💳 Pagar con Nequi</h3>
-        <h2 style="color:#22c55e;">3001234567</h2>
+        <h2 style="color:#22c55e; margin:15px 0;">3001234567</h2>
         <button onclick="cerrarModal()">✅ OK Pagado</button>
     </div>
 </div>
@@ -492,7 +396,7 @@ canal.onmessage = (e)=>{
         pedidos.unshift(e.data.pedido);
         guardar();
         render();
-        if(role !== "cliente") toast("🔔 Nuevo pedido!");
+        toast("🔔 Nuevo pedido!");
     }
 };
 
@@ -510,8 +414,83 @@ function login(){
         if(pass!==creadorPass) return toast("❌ Error contraseña");
         role="dueno";
         document.querySelectorAll('.toggle').forEach(btn => btn.style.display = 'block');
-        document.getElementById("roleText").textContent="Dueño 👑";
         document.getElementById("roleText").className = "role-badge dueno";
+        document.getElementById("roleText").innerText="Dueño 👑";
     }else{
         role="cliente";
-        let mesa =
+        let mesa = prompt("🌊 ¿Qué mesa? (1, 2, 3 o 'llevar')");
+        if(!mesa) return toast("❌ Selecciona mesa");
+        userMesa = mesa.toLowerCase().includes('llevar') ? 'Para llevar 🚗' : `Mesa ${mesa}`;
+    }
+
+    document.getElementById("login").style.display="none";
+    cargar();
+    render();
+}
+
+function guardar(){localStorage.setItem("pedidos",JSON.stringify(pedidos));}
+function cargar(){pedidos=JSON.parse(localStorage.getItem("pedidos"))||[];}
+
+function pedir(prod,precio){
+    if(role==="cliente" && !userMesa) return toast("❌ Login primero");
+
+    let nombre = prompt("👤 ¿Nombre del cliente?");
+    if(!nombre) return toast("❌ Nombre requerido");
+
+    let cantidad = prompt("📊 ¿Cuántas porciones?", "1");
+    if(!cantidad || isNaN(cantidad)) cantidad = 1;
+    let total = precio * parseInt(cantidad);
+
+    if(!confirm(`🍽️ ${prod}\n👤 ${nombre}\n📊 ${cantidad} x $${precio.toLocaleString()}\n💰 TOTAL: $${total.toLocaleString()}\n📍 ${userMesa || 'Cocina'}\n\n¿Confirmar pedido?`)){
+        return;
+    }
+
+    const pedido = {
+        id: Date.now(),
+        nombre: nombre.trim(),
+        mesa: userMesa || 'Cocina',
+        producto: `${prod} (${cantidad})`,
+        precio: total,
+        estado: "🆕 Nuevo",
+        timestamp: new Date().toLocaleTimeString()
+    };
+
+    pedidos.unshift(pedido);
+    guardar();
+    canal.postMessage({type:"nuevo", pedido});
+
+    if(confirm(`💰 Total: $${total.toLocaleString()}\n📍 ${userMesa}\n\n¿Pagar ahora con Nequi?`)){
+        document.getElementById("modalPago").style.display="flex";
+    }
+
+    toast("✅ Pedido enviado a cocina!");
+    render();
+}
+
+function render(){
+    cargar();
+    let cont=document.getElementById("listaPedidos");
+    if(!cont) return;
+
+    if(pedidos.length===0){
+        cont.innerHTML='<div style="text-align:center;padding:40px;color:#94a3b8;">🎉 No hay pedidos</div>';
+        return;
+    }
+
+    cont.innerHTML = pedidos.map(p => `
+        <div class="pedido">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;">
+                <div style="flex:1;">
+                    <b style="font-size:16px;">${p.nombre}</b><br>
+                    <span style="font-size:14px;">🍽️ ${p.producto}</span><br>
+                    <span style="color:#22c55e;font-weight:600;">💰 $${p.precio.toLocaleString()}</span> | 
+                    <span style="color:#94a3b8;">📍 ${p.mesa}</span>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:12px;color:#94a3b8;">${p.timestamp}</div>
+                    <span style="background:#10b981;padding:6px 12px;border-radius:10px;font-size:13px;display:inline-block;">${p.estado}</span>
+                </div>
+            </div>
+            ${role === "dueno" ? `
+                <div style="margin-top:15px;padding-top:15px;border-top:1px solid #475569;">
+                    <button class="status-btn" onclick="cambiarEstado(${p.id},'🔥 Preparando')" style="background:#f59e0b

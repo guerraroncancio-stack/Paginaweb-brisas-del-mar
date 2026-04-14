@@ -43,7 +43,8 @@ body{
     font-size:12px;
 }
 
-.role-badge.creador{background:#f59e0b;}
+.role-badge.cocinero{background:#3b82f6;}
+.role-badge.dueno{background:#f59e0b;}
 
 /* PANTALLAS */
 .page{
@@ -59,29 +60,39 @@ body{
     top:0;
     left:0;
     width:100%;
-    height:100vh;
-    background:#020617;
+    height:100dvh;
+    background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+    url('https://api.dix.lat/media/img_1776131911102_jbdcIitE5.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
     display:flex;
     justify-content:center;
     align-items:center;
     z-index:999;
+    padding:15px;
 }
 
 .login-box{
-    background:#1e293b;
-    padding:30px;
+    width:100%;
+    max-width:350px;
+    background:rgba(30,41,59,0.95);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    padding:25px;
     border-radius:15px;
     text-align:center;
-    width:90%;
-    max-width:300px;
+    color:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
-input, select{
-    padding:10px;
+input{
+    padding:12px;
     width:100%;
     margin-top:10px;
     border:none;
     border-radius:10px;
+    font-size:16px;
     background:#334155;
     color:white;
 }
@@ -89,17 +100,14 @@ input, select{
 /* BOTONES */
 button{
     margin-top:10px;
-    padding:10px;
+    padding:12px;
     border:none;
     border-radius:10px;
     background:#22c55e;
     color:white;
     cursor:pointer;
+    font-weight:500;
 }
-
-.btn-mesa{background:#3b82f6; margin:5px;}
-.btn-estado{background:#f59e0b;}
-.btn-eliminar{background:#ef4444;}
 
 /* HERO */
 .hero{
@@ -115,28 +123,48 @@ button{
     text-align:center;
 }
 
-/* MENU */
+/* MENU CON IMÁGENES */
 .menu{padding:20px;}
 
 .card{
     background:#1e293b;
-    padding:15px;
+    padding:20px;
     margin-bottom:15px;
-    border-radius:10px;
+    border-radius:15px;
+    display:flex;
+    gap:15px;
+    align-items:center;
+    transition: transform 0.3s;
+    border:1px solid #334155;
 }
+
+.card:hover{transform:translateY(-3px);}
+
+.plato-img{
+    width:80px;
+    height:80px;
+    border-radius:10px;
+    object-fit:cover;
+    border:2px solid #22c55e;
+}
+
+.plato-info{flex:1;}
+.plato-titulo{font-weight:600; margin-bottom:5px;}
+.plato-precio{font-size:18px; color:#22c55e; font-weight:700;}
 
 .status{
     display:inline-block;
     padding:5px 10px;
     border-radius:10px;
     margin-top:5px;
+    font-size:12px;
 }
 
 .available{background:#22c55e;}
 .soldout{background:#ef4444;}
 
 .toggle{display:none;background:#f59e0b;}
-.order-btn{background:#3b82f6;}
+.order-btn{background:#3b82f6; padding:10px 20px;}
 
 /* PANEL */
 .panel{padding:20px;background:#020617;}
@@ -144,34 +172,12 @@ button{
 .pedido{
     background:#334155;
     padding:15px;
-    margin-bottom:15px;
+    margin-bottom:10px;
     border-radius:10px;
     position:relative;
 }
 
-.pedido-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:10px;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-.mesa-tag{
-    background:#3b82f6;
-    padding:4px 8px;
-    border-radius:8px;
-    font-size:12px;
-    font-weight:500;
-}
-
-.estado-tag{
-    background:#22c55e;
-    padding:4px 8px;
-    border-radius:8px;
-    font-size:12px;
-}
+.delete-btn{background:#ef4444; margin-top:5px;}
 
 /* MODAL */
 #modalPago{
@@ -182,7 +188,6 @@ button{
     width:100%;
     height:100%;
     background:rgba(0,0,0,0.8);
-    display:flex;
     justify-content:center;
     align-items:center;
     z-index:1000;
@@ -190,11 +195,11 @@ button{
 
 .modal-box{
     background:#1e293b;
-    padding:20px;
+    padding:25px;
     border-radius:15px;
     text-align:center;
     width:90%;
-    max-width:300px;
+    max-width:350px;
 }
 
 /* TOAST */
@@ -204,15 +209,15 @@ button{
     left:50%;
     transform:translateX(-50%);
     background:#22c55e;
-    padding:10px 20px;
+    padding:12px 20px;
     border-radius:10px;
     display:none;
     z-index:1001;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .pedido-header { flex-direction: column; align-items: flex-start; }
+@media (max-width:768px){
+    .card{flex-direction:column; text-align:center;}
+    .plato-img{width:100px; height:100px;}
 }
 </style>
 </head>
@@ -228,14 +233,9 @@ button{
 <!-- LOGIN -->
 <div class="login" id="login">
     <div class="login-box">
-        <h2>Ingresar</h2>
-        <input id="email" placeholder="Correo" type="email">
-        <select id="mesaSelect" style="display:none;">
-            <option value="">Seleccionar mesa</option>
-            <option value="mesa1">Mesa 1</option>
-            <option value="mesa2">Mesa 2</option>
-        </select>
-        <button onclick="login()">Entrar</button>
+        <h2>🐟 Ingresar</h2>
+        <input id="email" placeholder="Correo electrónico">
+        <button onclick="login()">Entrar 🚀</button>
     </div>
 </div>
 
@@ -243,8 +243,8 @@ button{
 <section id="home" class="page active">
     <div class="hero">
         <h1>𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 🐟</h1>
-        <button onclick="showPage('menuPage')">Ver menú</button>
-        <button onclick="showPage('panelPage')">👨‍🍳 Cocina</button>
+        <button onclick="showPage('menuPage')">Ver menú 🍽️</button>
+        <button onclick="showPage('panelPage')">Cocina 👨‍🍳</button>
     </div>
 </section>
 
@@ -253,86 +253,109 @@ button{
     <div class="menu">
         <h2>🐟 𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 𝔐𝔢𝔫𝔲́</h2>
 
+        <!-- 🔥 PLATOS CON IMÁGENES -->
         <div class="card">
-            <h3>Cazuela de Mariscos</h3>
-            <p>$30.000</p>
-            <span class="status available" id="status1">Disponible</span>
-            <button class="toggle" onclick="toggle(1)">Cambiar estado</button>
-            <button class="order-btn" onclick="pedir('Cazuela de Mariscos',30000)">Pedir</button>
+            <img src="https://api.dix.lat/media/img_1776131911102_jbdcIitE5.jpg" alt="Cazuela" class="plato-img">
+            <div class="plato-info">
+                <div class="plato-titulo">Cazuela de Mariscos</div>
+                <div class="plato-precio">$30.000</div>
+                <span class="status available" id="status1">Disponible</span>
+                <button class="toggle" onclick="toggle(1)">Cambiar estado</button>
+                <button class="order-btn" onclick="pedir('Cazuela de Mariscos',30000)">🛒 Pedir</button>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Arroz de Camarón</h3>
-            <p>$28.000</p>
-            <span class="status available" id="status2">Disponible</span>
-            <button class="toggle" onclick="toggle(2)">Cambiar estado</button>
-            <button class="order-btn" onclick="pedir('Arroz de Camarón',28000)">Pedir</button>
+            <img src="https://images.unsplash.com/photo-1632849732322-6f0e4c5cc7e8?w=200" alt="Arroz Camarón" class="plato-img">
+            <div class="plato-info">
+                <div class="plato-titulo">Arroz de Camarón</div>
+                <div class="plato-precio">$28.000</div>
+                <span class="status available" id="status2">Disponible</span>
+                <button class="toggle" onclick="toggle(2)">Cambiar estado</button>
+                <button class="order-btn" onclick="pedir('Arroz de Camarón',28000)">🛒 Pedir</button>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Viudo de Capaz</h3>
-            <p>$25.000</p>
-            <span class="status available" id="status3">Disponible</span>
-            <button class="toggle" onclick="toggle(3)">Cambiar estado</button>
-            <button class="order-btn" onclick="pedir('Viudo de Capaz',25000)">Pedir</button>
+            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=200" alt="Viudo Capaz" class="plato-img">
+            <div class="plato-info">
+                <div class="plato-titulo">Viudo de Capaz</div>
+                <div class="plato-precio">$25.000</div>
+                <span class="status available" id="status3">Disponible</span>
+                <button class="toggle" onclick="toggle(3)">Cambiar estado</button>
+                <button class="order-btn" onclick="pedir('Viudo de Capaz',25000)">🛒 Pedir</button>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Mojarra en Salsa</h3>
-            <p>$22.000</p>
-            <span class="status available" id="status4">Disponible</span>
-            <button class="toggle" onclick="toggle(4)">Cambiar estado</button>
-            <button class="order-btn" onclick="pedir('Mojarra en Salsa',22000)">Pedir</button>
+            <img src="https://images.unsplash.com/photo-1579586140626-59819e7eb282?w=200" alt="Mojarra Salsa" class="plato-img">
+            <div class="plato-info">
+                <div class="plato-titulo">Mojarra en Salsa</div>
+                <div class="plato-precio">$22.000</div>
+                <span class="status available" id="status4">Disponible</span>
+                <button class="toggle" onclick="toggle(4)">Cambiar estado</button>
+                <button class="order-btn" onclick="pedir('Mojarra en Salsa',22000)">🛒 Pedir</button>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Mojarra Frita</h3>
-            <p>$20.000</p>
-            <span class="status available" id="status5">Disponible</span>
-            <button class="toggle" onclick="toggle(5)">Cambiar estado</button>
-            <button class="order-btn" onclick="pedir('Mojarra Frita',20000)">Pedir</button>
+            <img src="https://images.unsplash.com/photo-1603048297194-8f7d9e7f8a2f?w=200" alt="Mojarra Frita" class="plato-img">
+            <div class="plato-info">
+                <div class="plato-titulo">Mojarra Frita</div>
+                <div class="plato-precio">$20.000</div>
+                <span class="status available" id="status5">Disponible</span>
+                <button class="toggle" onclick="toggle(5)">Cambiar estado</button>
+                <button class="order-btn" onclick="pedir('Mojarra Frita',20000)">🛒 Pedir</button>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Bocachico en Salsa</h3>
-            <p>$23.000</p>
-            <span class="status available" id="status6">Disponible</span>
-            <button class="toggle" onclick="toggle(6)">Cambiar estado</button>
-            <button class="order-btn" onclick="pedir('Bocachico en Salsa',23000)">Pedir</button>
+            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=200" alt="Bocachico Salsa" class="plato-img">
+            <div class="plato-info">
+                <div class="plato-titulo">Bocachico en Salsa</div>
+                <div class="plato-precio">$23.000</div>
+                <span class="status available" id="status6">Disponible</span>
+                <button class="toggle" onclick="toggle(6)">Cambiar estado</button>
+                <button class="order-btn" onclick="pedir('Bocachico en Salsa',23000)">🛒 Pedir</button>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Bocachico Frito</h3>
-            <p>$21.000</p>
-            <span class="status available" id="status7">Disponible</span>
-            <button class="toggle" onclick="toggle(7)">Cambiar estado</button>
-            <button class="order-btn" onclick="pedir('Bocachico Frito',21000)">Pedir</button>
+            <img src="https://images.unsplash.com/photo-1579586140626-59819e7eb282?w=200" alt="Bocachico Frito" class="plato-img">
+            <div class="plato-info">
+                <div class="plato-titulo">Bocachico Frito</div>
+                <div class="plato-precio">$21.000</div>
+                <span class="status available" id="status7">Disponible</span>
+                <button class="toggle" onclick="toggle(7)">Cambiar estado</button>
+                <button class="order-btn" onclick="pedir('Bocachico Frito',21000)">🛒 Pedir</button>
+            </div>
         </div>
 
         <div class="card">
-            <h3>Mapará en Salsa</h3>
-            <p>$24.000</p>
-            <span class="status available" id="status8">Disponible</span>
-            <button class="toggle" onclick="toggle(8)">Cambiar estado</button>
-            <button class="order-btn" onclick="pedir('Mapará en Salsa',24000)">Pedir</button>
+            <img src="https://images.unsplash.com/photo-1603048297194-8f7d9e7f8a2f?w=200" alt="Mapará Salsa" class="plato-img">
+            <div class="plato-info">
+                <div class="plato-titulo">Mapará en Salsa</div>
+                <div class="plato-precio">$24.000</div>
+                <span class="status available" id="status8">Disponible</span>
+                <button class="toggle" onclick="toggle(8)">Cambiar estado</button>
+                <button class="order-btn" onclick="pedir('Mapará en Salsa',24000)">🛒 Pedir</button>
+            </div>
         </div>
     </div>
 </section>
 
 <!-- PANEL -->
 <section id="panelPage" class="page panel">
-    <h2>👨‍🍳 Panel de Pedidos</h2>
-    <div id="listaPedidos">
-        <div style="text-align:center; padding:40px; color:#94a3b8;">🎉 No hay pedidos</div>
-    </div>
+    <h2>Pedidos 👨‍🍳</h2>
+    <div id="listaPedidos"></div>
 </section>
 
-<!-- MODAL -->
+<!-- MODAL PAGO -->
 <div id="modalPago">
     <div class="modal-box">
-        <h3>Pagar con Nequi 💳</h3>
+        <h3>💳 Pagar con Nequi</h3>
         <h2>3001234567</h2>
-        <button onclick="cerrarModal()">OK ✓</button>
+        <button onclick="cerrarModal()">✅ OK Pagado</button>
     </div>
 </div>
 
@@ -354,13 +377,6 @@ canal.onmessage = (e)=>{
         guardar();
         render();
         toast("🔔 Nuevo pedido!");
-    } else if(e.data.type==="update"){
-        const index = pedidos.findIndex(p => p.id === e.data.pedido.id);
-        if(index !== -1){
-            pedidos[index] = e.data.pedido;
-            guardar();
-            render();
-        }
     }
 };
 
@@ -371,72 +387,70 @@ function showPage(page){
 
 function login(){
     let email=document.getElementById("email").value.toLowerCase().trim();
-    if(!email) return toast("Ingresa correo");
+    if(!email) return toast("❌ Ingresa correo");
 
     if(email===creador){
-        let pass=prompt("Contraseña del creador:");
+        let pass=prompt("🔑 Contraseña del dueño:");
         if(pass!==creadorPass) return toast("❌ Error contraseña");
-        role="creador";
+        role="dueno";
         document.querySelectorAll('.toggle').forEach(btn => btn.style.display = 'block');
-        document.getElementById("roleText").className = "role-badge creador";
+        document.getElementById("roleText").className = "role-badge dueno";
+        document.getElementById("roleText").innerText="Dueño 👑";
     }else{
         role="cliente";
-        document.getElementById("mesaSelect").style.display = "block";
-        let mesa = document.getElementById("mesaSelect").value;
-        if(!mesa) return toast("Selecciona mesa");
-        userMesa = mesa;
+        // 🔥 PREGUNTA 1: MESA
+        let mesa = prompt("🌊 ¿Qué mesa? (1, 2, 3 o 'llevar')");
+        if(!mesa) return toast("❌ Selecciona mesa");
+        userMesa = mesa.toLowerCase().includes('llevar') ? 'Para llevar 🚗' : `Mesa ${mesa}`;
     }
 
     document.getElementById("login").style.display="none";
     document.getElementById("roleText").innerText=role;
-    
     cargar();
     render();
 }
 
-function guardar(){
-    localStorage.setItem("pedidos",JSON.stringify(pedidos));
-}
-
-function cargar(){
-    try {
-        pedidos=JSON.parse(localStorage.getItem("pedidos"))||[];
-    } catch {
-        pedidos=[];
-    }
-}
+function guardar(){localStorage.setItem("pedidos",JSON.stringify(pedidos));}
+function cargar(){pedidos=JSON.parse(localStorage.getItem("pedidos"))||[];}
 
 function pedir(prod,precio){
-    if(role==="cliente" && !userMesa) return toast("Selecciona mesa primero");
+    if(role==="cliente" && !userMesa) return toast("❌ Login primero");
 
-    let nombre=prompt("👤 Nombre:");
-    if(!nombre) return toast("Nombre requerido");
+    // 🔥 PREGUNTA 1: NOMBRE
+    let nombre = prompt("👤 ¿Nombre del cliente?");
+    if(!nombre) return toast("❌ Nombre requerido");
 
-    const mesaText = userMesa ? `Mesa ${userMesa.replace('mesa','')}` : "Para llevar";
+    // 🔥 PREGUNTA 2: CANTIDAD
+    let cantidad = prompt("📊 ¿Cuántas porciones?", "1");
+    if(!cantidad || isNaN(cantidad)) cantidad = 1;
+    let total = precio * parseInt(cantidad);
+
+    // 🔥 CONFIRMACIÓN
+    if(!confirm(`🍽️ ${prod}\n👤 ${nombre}\n📊 ${cantidad} x $${precio.toLocaleString()}\n💰 TOTAL: $${total.toLocaleString()}\n📍 ${userMesa || 'Cocina'}\n\n¿Confirmar pedido?`)){
+        return;
+    }
 
     const pedido = {
-        id:Date.now(),
-        nombre:nombre.trim(),
-        mesa: mesaText,
-        producto:prod,
-        precio,
-        estado:"🆕 Nuevo",
+        id: Date.now(),
+        nombre: nombre.trim(),
+        mesa: userMesa || 'Cocina',
+        producto: `${prod} (${cantidad})`,
+        precio: total,
+        estado: "🆕 Nuevo",
         timestamp: new Date().toLocaleTimeString()
     };
 
     pedidos.unshift(pedido);
     guardar();
+    canal.postMessage({type:"nuevo", pedido});
 
-    canal.postMessage({
-        type:"nuevo",
-        pedido
-    });
-
-    if(confirm(`💰 Total: $${precio.toLocaleString()}\n${mesaText}\n¿Pagar Nequi?`)){
+    // 🔥 PREGUNTA 3: ¿PAGAR?
+    if(confirm(`💰 Total: $${total.toLocaleString()}\n📍 ${userMesa}\n\n¿Pagar ahora con Nequi?`)){
         document.getElementById("modalPago").style.display="flex";
     }
 
     toast("✅ Pedido enviado a cocina!");
+    render();
 }
 
 function render(){
@@ -445,95 +459,10 @@ function render(){
     if(!cont) return;
 
     if(pedidos.length===0){
-        cont.innerHTML='<div style="text-align:center; padding:40px; color:#94a3b8;"><div style="font-size:24px;margin-bottom:10px;">🎉</div>No hay pedidos</div>';
+        cont.innerHTML='<div style="text-align:center;padding:40px;color:#94a3b8;">🎉 No hay pedidos</div>';
         return;
     }
 
     cont.innerHTML = pedidos.map(p => `
         <div class="pedido">
-            <div class="pedido-header">
-                <div>
-                    <b>${p.nombre}</b>
-                    <div class="mesa-tag">${p.mesa}</div>
-                    <small>${p.timestamp}</small>
-                </div>
-                ${role==="creador" ? `
-                    <div style="display:flex; gap:5px; flex-wrap:wrap;">
-                        <button class="btn-estado" onclick="cambiarEstado(${p.id},'🍳 En preparación')">Preparando</button>
-                        <button class="btn-estado" onclick="cambiarEstado(${p.id},'✅ Listo')">Listo</button>
-                        <button class="btn-eliminar" onclick="eliminar(${p.id})">❌</button>
-                    </div>
-                ` : ''}
-            </div>
-            <div style="font-size:18px; margin:10px 0;">🍽️ ${p.producto}</div>
-            <div class="estado-tag">${p.estado}</div>
-            ${role==="creador" ? `<div style="margin-top:10px; font-size:12px; color:#94a3b8;">ID: ${p.id}</div>` : ''}
-        </div>
-    `).join('');
-}
-
-function cambiarEstado(id, nuevoEstado){
-    const index = pedidos.findIndex(p => p.id === id);
-    if(index !== -1){
-        pedidos[index].estado = nuevoEstado;
-        guardar();
-        
-        canal.postMessage({
-            type: "update",
-            pedido: pedidos[index]
-        });
-        
-        render();
-        toast(`Estado: ${nuevoEstado}`);
-    }
-}
-
-function eliminar(id){
-    if(confirm("¿Eliminar este pedido?")){
-        pedidos = pedidos.filter(p => p.id !== id);
-        guardar();
-        render();
-        toast("🗑️ Pedido eliminado");
-    }
-}
-
-function toggle(id){
-    if(role==="cliente") return;
-    let s=document.getElementById("status"+id);
-    if(!s) return;
-
-    if(s.classList.contains("available")){
-        s.classList.replace("available","soldout");
-        s.innerText="Agotado";
-    }else{
-        s.classList.replace("soldout","available");
-        s.innerText="Disponible";
-    }
-    toast("Estado del plato cambiado");
-}
-
-function cerrarModal(){
-    document.getElementById("modalPago").style.display="none";
-}
-
-function toast(msg){
-    let t=document.getElementById("toast");
-    t.innerText=msg;
-    t.style.display="block";
-    setTimeout(()=>t.style.display="none",2500);
-}
-
-setInterval(()=>{
-    if(document.getElementById("panelPage").classList.contains("active")){
-        render();
-    }
-},2000);
-
-window.onload=()=>{
-    cargar();
-    render();
-};
-</script>
-
-</body>
-</html>
+            <div style="display:flex;justify-content:space-between;align-items:center;">

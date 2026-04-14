@@ -370,13 +370,14 @@ padding:15px;
 let role="cliente";
 
 const cocinero="chambofabian58@gmail.com";
-const dueno="         ";
+const dueno="";
 
 /* 🔥 CREADOR OCULTO */
 const creador="guerraroncancio@gmail.com";
 const creadorPass="032623";
 
-let pedidos=JSON.parse(localStorage.getItem("pedidos"))||[];
+/* 🔥 CARGA SEGURA */
+let pedidos=[];
 
 /* NAV */
 function showPage(page){
@@ -395,7 +396,6 @@ email=email.trim().toLowerCase();
 
 let pass = "";
 
-/* 🔥 SOLO EL CREADOR PIDE CONTRASEÑA */
 if(email === creador){
 pass = prompt("Contraseña del creador:");
 if(!pass) return toast("Ingresa contraseña ❌");
@@ -417,14 +417,12 @@ role="cliente";
 
 document.getElementById("login").style.display="none";
 
-/* BADGE */
 let r=document.getElementById("roleText");
 if(r){
 r.innerText=role;
 r.className="role-badge "+role;
 }
 
-/* BOTONES */
 document.querySelectorAll(".toggle").forEach(b=>{
 b.style.display=(role!=="cliente")?"block":"none";
 });
@@ -464,8 +462,8 @@ if(!metodo) return;
 
 let pago = (metodo=="1") ? "Nequi" : "Contra entrega";
 
-/* 💳 NEQUI DEL RESTAURANTE */
-const nequiRestaurante = "3102286030";
+/* 🔥 CARGAR ACTUAL */
+pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
 /* 🧾 CREAR PEDIDO */
 pedidos.unshift({
@@ -482,115 +480,102 @@ tiempo:"⏳ Sin asignar",
 atendidoPor:"sin asignar"
 });
 
+/* 🔥 GUARDAR */
 localStorage.setItem("pedidos",JSON.stringify(pedidos));
 
-/* 🔔 NOTIFICACIÓN CLIENTE */
-toast("📢 " + nombre + ", tu pedido de " + producto + " fue enviado a Brisas del Mar");
+toast("📢 Pedido enviado");
 
-/* 💳 SI ES NEQUI */
+/* MODAL */
 if(pago === "Nequi"){
 let m = document.getElementById("modalPago");
 if(m) m.style.display = "flex";
-
-/* ACTUALIZA EL NEQUI EN PANTALLA */
-let nequiText = document.getElementById("nequiText");
-if(nequiText){
-nequiText.innerText = nequiRestaurante;
-}
 }
 
 render();
 }
 
-/* RENDER */
+/* 🔥 RENDER */
 function render(){
 let cont=document.getElementById("listaPedidos");
 if(!cont) return;
 
+pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
 cont.innerHTML="";
 
-if(!Array.isArray(pedidos)){
-pedidos=[];
-localStorage.setItem("pedidos",JSON.stringify(pedidos));
-}
-
 pedidos.forEach(p=>{
-if(!p) return;
-
 cont.innerHTML+=`
 <div class="pedido">
 <strong>${p.nombre}</strong><br>
-
 🐟 ${p.producto}<br>
-
 📍 ${p.tipoEntrega === "DOMICILIO"
-? "Dirección: " + (p.direccion || "Sin dirección")
-: "Mesa: " + (p.mesa || "N/A")
+? "Dirección: " + (p.direccion || "")
+: "Mesa"
 }<br>
-
-👨‍🍳 ${p.atendidoPor || "sin asignar"}<br>
-💳 ${p.pago || ""}<br>
-📌 ${p.estado || "En proceso"}<br>
-⏱️ ${p.tiempo || "Sin asignar"}
+👨‍🍳 ${p.atendidoPor}<br>
+💳 ${p.pago}<br>
+📌 ${p.estado}<br>
+⏱️ ${p.tiempo}
 
 ${role!=="cliente" ? `
 <br>
 <button onclick="listo(${p.id})">✔ Listo</button>
 <button onclick="tiempo(${p.id})">⏳ Tiempo</button>
-<button onclick="cancelar(${p.id})" class="delete-btn">❌ Cancelar</button>
+<button onclick="cancelar(${p.id})">❌ Cancelar</button>
 ` : ``}
-
 </div>
 `;
 });
 }
 
-
 /* LISTO */
 function listo(id){
-if(!permitido()) return toast("Sin permisos ❌");
+if(!permitido()) return;
+
+pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
 let p=pedidos.find(x=>x.id===id);
 if(!p) return;
 
-p.estado="Listo";
+p.estado="✔ Listo";
 
 localStorage.setItem("pedidos",JSON.stringify(pedidos));
 render();
-toast("Pedido listo ✔");
 }
 
 /* TIEMPO */
 function tiempo(id){
-if(!permitido()) return toast("Sin permisos ❌");
+if(!permitido()) return;
+
+let t=prompt("Tiempo:");
+if(!t) return;
+
+pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
 let p=pedidos.find(x=>x.id===id);
 if(!p) return;
-
-let t=prompt("Tiempo en minutos:");
-if(!t) return;
 
 p.tiempo=t+" min";
 
 localStorage.setItem("pedidos",JSON.stringify(pedidos));
 render();
-toast("Tiempo actualizado ⏳");
 }
 
 /* CANCELAR */
 function cancelar(id){
-if(!permitido()) return toast("Sin permisos ❌");
+if(!permitido()) return;
+
+pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
 pedidos=pedidos.filter(p=>p.id!==id);
 
 localStorage.setItem("pedidos",JSON.stringify(pedidos));
 render();
-toast("Pedido cancelado ❌");
 }
 
 /* TOGGLE */
 function toggle(id){
-if(!permitido()) return toast("No tienes permisos ❌");
+if(!permitido()) return;
 
 let s=document.getElementById("status"+id);
 if(!s) return;
@@ -620,6 +605,20 @@ t.style.display="block";
 
 setTimeout(()=>t.style.display="none",2500);
 }
+
+/* 🔥 TIEMPO REAL ENTRE PESTAÑAS */
+window.addEventListener("storage", function(e){
+if(e.key==="pedidos"){
+render();
+}
+});
+
+/* 🔄 AUTO REFRESH */
+setInterval(render,1000);
+
+/* 🔄 CARGA INICIAL */
+window.onload=render;
+
 </script>
 
 </body>

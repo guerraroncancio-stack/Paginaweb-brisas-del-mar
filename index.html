@@ -3,740 +3,898 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯🐟</title>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<title>𝓑𝓻𝓲𝓼𝓪𝓼 𝓭𝓮𝓵 𝓜𝓪𝓻</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins', sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
 }
 
 body{
-    background:#0f172a;
-    color:white;
+  background:#f7f3eb;
+  color:#241c16;
 }
 
-/* TOP BAR */
-.topbar{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    padding:12px 15px;
-    background:#020617;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    z-index:1000;
-    font-size:14px;
-    border-bottom:1px solid #1e293b;
+header{
+  background:#e8491d;
+  color:white;
+  padding:15px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:10;
 }
 
-.role-badge{
-    background:#22c55e;
-    padding:5px 10px;
-    border-radius:10px;
-    font-size:12px;
+header h1{
+  font-size:28px;
 }
 
-.role-badge.cocinero{background:#3b82f6;}
-.role-badge.dueno{background:#f59e0b;}
-
-/* PANTALLAS */
-.page{
-    display:none;
-    min-height:100vh;
-    padding-top:60px;
-}
-.active{display:block;}
-
-/* LOGIN */
-.login{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:#020617;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:999;
+nav{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  padding:12px;
+  background:white;
+  border-bottom:1px solid #ddd;
 }
 
-.login-box{
-    background:#1e293b;
-    padding:30px;
-    border-radius:15px;
-    text-align:center;
-    width:90%;
-    max-width:300px;
-}
-
-input{
-    padding:10px;
-    width:100%;
-    margin-top:10px;
-    border:none;
-    border-radius:10px;
-}
-
-/* BOTONES */
 button{
-    padding:10px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    background:#22c55e;
-    color:white;
-    width:100%;
-    margin-top:8px;
-    font-weight:bold;
+  border:none;
+  border-radius:8px;
+  padding:10px 14px;
+  background:#e8491d;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 button:hover{
-    background:#16a34a;
+  background:#c83712;
 }
 
-/* HERO */
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+button.secondary{
+  background:#264653;
+}
+
+button.danger{
+  background:#c1121f;
+}
+
+button.outline{
+  background:white;
+  color:#e8491d;
+  border:1px solid #e8491d;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.cover{
+  min-height:330px;
+  border-radius:18px;
+  margin-bottom:25px;
+  overflow:hidden;
+  background:
+    linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.65)),
+    url("https://api.dix.lat/media/img_1776131911102_jbdcIitE5.jpg");
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.cover-content{
+  padding:25px;
+}
+
+.cover h2{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.cover p{
+  font-size:18px;
+  margin-bottom:18px;
+}
+
 .hero{
-    height:100vh;
-    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),
-    url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092');
-    background-size:cover;
-    background-position:center;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  margin-bottom:20px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 
-/* MENU */
-.menu{padding:20px;}
+.hero h2{
+  font-size:30px;
+  margin-bottom:8px;
+  color:#e8491d;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:15px;
+}
 
 .card{
-    background:#1e293b;
-    padding:15px;
-    margin-bottom:15px;
-    border-radius:10px;
+  background:white;
+  border-radius:12px;
+  padding:18px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  border:1px solid #eadfd0;
 }
 
-.status{
-    display:inline-block;
-    padding:5px 10px;
-    border-radius:10px;
-    margin-top:5px;
+.card h3{
+  margin-bottom:8px;
 }
 
-.available{background:#22c55e;}
-.soldout{background:#ef4444;}
-
-.toggle{display:none;background:#f59e0b;}
-.order-btn{background:#3b82f6;}
-
-/* PANEL */
-.panel{padding:20px;background:#020617;}
-
-.pedido{
-    background:#334155;
-    padding:10px;
-    margin-bottom:10px;
-    border-radius:10px;
+.price{
+  color:#e8491d;
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:12px;
 }
 
-.delete-btn{
-    background:#ef4444;
-    margin-top:5px;
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:10px;
 }
 
-/* MODAL */
-#modalPago{
-    display:none;
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.8);
-    justify-content:center;
-    align-items:center;
-    z-index:1000;
+.available{
+  background:#d8f3dc;
+  color:#1b7f3a;
+}
+
+.soldout{
+  background:#ffd6d6;
+  color:#a30000;
+}
+
+.category-title{
+  color:#e8491d;
+  margin:25px 0 12px;
+  border-bottom:1px solid #e7d8c9;
+  padding-bottom:8px;
+}
+
+.form-box{
+  max-width:420px;
+  margin:30px auto;
+  background:white;
+  padding:25px;
+  border-radius:14px;
+  box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+input,select{
+  width:100%;
+  padding:12px;
+  margin:8px 0 14px;
+  border-radius:8px;
+  border:1px solid #d4c4b5;
+  font-size:16px;
+}
+
+label{
+  font-weight:bold;
+}
+
+.order{
+  background:white;
+  border-left:6px solid #e8491d;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:12px;
+  box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.order strong{
+  color:#e8491d;
+}
+
+.order-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:15px;
+  margin-top:15px;
+}
+
+.stat{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.stat h3{
+  color:#e8491d;
+  font-size:28px;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+  padding:15px;
+}
+
+.modal.active{
+  display:flex;
 }
 
 .modal-box{
-    background:#1e293b;
-    padding:20px;
-    border-radius:15px;
-    text-align:center;
-    width:90%;
-    max-width:300px;
+  width:100%;
+  max-width:430px;
+  background:white;
+  border-radius:14px;
+  padding:20px;
+  max-height:90vh;
+  overflow-y:auto;
 }
 
-/* TOAST */
 .toast{
-    position:fixed;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#22c55e;
-    padding:10px 20px;
-    border-radius:10px;
-    display:none;
+  position:fixed;
+  left:50%;
+  bottom:20px;
+  transform:translateX(-50%);
+  background:#264653;
+  color:white;
+  padding:12px 18px;
+  border-radius:10px;
+  display:none;
+  z-index:200;
+  text-align:center;
+}
+
+.top-row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+@media(max-width:600px){
+  header h1{
+    font-size:24px;
+  }
+
+  .container{
+    padding:12px;
+  }
+
+  nav button{
+    flex:1;
+  }
+
+  .cover{
+    min-height:280px;
+  }
+
+  .cover h2{
+    font-size:32px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-    <div>🐟 𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯</div>
-    <div id="roleText" class="role-badge">cliente</div>
-</div>
+<header>
+  <h1>𝓑𝓻𝓲𝓼𝓪𝓼 𝓭𝓮𝓵 𝓜𝓪𝓻</h1>
+  <p>𝓢𝓪𝓫𝓸𝓻 𝓭𝓮 𝓻í𝓸, 𝓽𝓻𝓪𝓭𝓲𝓬𝓲ó𝓷 𝓭𝓮 𝓯𝓪𝓶𝓲𝓵𝓲𝓪</p>
+</header>
 
-<!-- LOGIN -->
-<div class="login" id="login"
-style="
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100dvh;
+<nav>
+  <button onclick="showPage('menuPage')">Menú</button>
+  <button class="secondary" onclick="showPage('loginPage')">Entrar cocina/dueño</button>
+  <button class="secondary staff-only" onclick="showPage('kitchenPage')" style="display:none;">Cocina</button>
+  <button class="secondary owner-only" onclick="showPage('dashboardPage')" style="display:none;">Dueño</button>
+</nav>
 
-/* 🔥 FONDO RESPONSIVE */
-background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
-url('https://api.dix.lat/media/img_1776131911102_jbdcIitE5.jpg');
+<div class="container">
 
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
+  <section id="menuPage" class="page active">
 
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:999;
-padding:15px;
-">
-
-    <div style="
-    width:100%;
-    max-width:350px;
-
-/* 🔥 ADAPTADO A MÓVIL */
-    background:rgba(30,41,59,0.75);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-
-    padding:25px;
-    border-radius:15px;
-    text-align:center;
-    color:white;
-
-    box-shadow:0 10px 30px rgba(0,0,0,0.6);
-    ">
-
-        <h2 style="margin-bottom:10px;">Ingresar</h2>
-
-        <input id="email" placeholder="Correo"
-        style="
-        width:100%;
-        padding:12px;
-        margin-top:10px;
-        border:none;
-        border-radius:10px;
-        font-size:16px;
-        ">
-
-        <button onclick="login()"
-        style="
-        margin-top:15px;
-        padding:12px;
-        border:none;
-        border-radius:10px;
-        background:#22c55e;
-        color:white;
-        width:100%;
-        font-size:16px;
-        cursor:pointer;
-        ">
-        Entrar
+    <div class="cover">
+      <div class="cover-content">
+        <h2>𝓑𝓻𝓲𝓼𝓪𝓼 𝓭𝓮𝓵 𝓜𝓪𝓻</h2>
+        <p>𝓟𝓮𝓼𝓬𝓪𝓭𝓸 𝓯𝓻𝓮𝓼𝓬𝓸, 𝓬𝓸𝓶𝓲𝓭𝓪 𝓭𝓮 𝓻í𝓸 𝔂 𝓹𝓮𝓭𝓲𝓭𝓸𝓼 𝓪𝓵 𝓲𝓷𝓼𝓽𝓪𝓷𝓽𝓮.</p>
+        <button onclick="document.getElementById('menuContainer').scrollIntoView({behavior:'smooth'})">
+          Ver menú
         </button>
-
+      </div>
     </div>
 
-</div>
-
-<!-- HOME -->
-<section id="home" class="page active">
     <div class="hero">
-        <h1>𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 🐟</h1>
-        <button onclick="showPage('menuPage')">Ver menú</button>
-        <button onclick="showPage('panelPage')">Cocina</button>
+      <div class="top-row">
+        <div>
+          <h2>Nuestro Menú</h2>
+          <p>Lo mejor del río a tu mesa, fresco y con sazón de familia.</p>
+        </div>
+        <button class="outline" onclick="loadMenu()">Actualizar menú</button>
+      </div>
     </div>
-</section>
 
-<!-- MENU -->
-<section id="menuPage" class="page">
-<div class="menu">
+    <div id="menuContainer">Cargando menú...</div>
+  </section>
 
+  <section id="loginPage" class="page">
+    <div class="cover">
+      <div class="cover-content">
+        <h2>Ingreso del personal</h2>
+        <p>Cocina y dueño de  𝓑𝓻𝓲𝓼𝓪𝓼 𝓭𝓮𝓵 𝓜𝓪𝓻.</p>
+      </div>
+    </div>
 
-<!-- 🔥 MENÚ GOSA COMPLETO INTEGRADO -->
-<div class="menu">
+    <div class="form-box">
+      <h2>Entrar</h2>
+      <p>Ingresa tu correo para abrir cocina o dueño.</p>
 
-<h2 style="margin:20px 0;">🐟 𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 𝔐𝔢𝔫𝔲́ </h2>
+      <label>Correo</label>
+      <input id="loginEmail" type="email" placeholder="correo@ejemplo.com">
 
-<div class="card">
-<h3>Cazuela de Mariscos</h3>
-<p>$30.000</p>
-<span class="status available" id="status1">Disponible</span>
-<button class="toggle" onclick="toggle(1)">Cambiar estado</button>
-<button class="order-btn" onclick="pedir('Cazuela de Mariscos',30000)">Pedir</button>
-</div>
+      <label id="passwordLabel" style="display:none;">Contraseña creador</label>
+      <input id="loginPassword" type="password" placeholder="Contraseña" style="display:none;">
 
-<div class="card">
-<h3>Arroz de Camarón</h3>
-<p>$28.000</p>
-<span class="status available" id="status2">Disponible</span>
-<button class="toggle" onclick="toggle(2)">Cambiar estado</button>
-<button class="order-btn" onclick="pedir('Arroz de Camarón',28000)">Pedir</button>
-</div>
+      <button onclick="login()">Entrar</button>
+    </div>
+  </section>
 
-<div class="card">
-<h3>Viudo de Capaz</h3>
-<p>$25.000</p>
-<span class="status available" id="status3">Disponible</span>
-<button class="toggle" onclick="toggle(3)">Cambiar estado</button>
-<button class="order-btn" onclick="pedir('Viudo de Capaz',25000)">Pedir</button>
-</div>
+  <section id="kitchenPage" class="page">
+    <div class="hero">
+      <div class="top-row">
+        <div>
+          <h2>Panel de Cocina</h2>
+          <p>Aquí llegan los pedidos de los clientes.</p>
+        </div>
+        <button onclick="loadOrders()">Actualizar pedidos</button>
+      </div>
+    </div>
 
-<div class="card">
-<h3>Mojarra en Salsa</h3>
-<p>$22.000</p>
-<span class="status available" id="status4">Disponible</span>
-<button class="toggle" onclick="toggle(4)">Cambiar estado</button>
-<button class="order-btn" onclick="pedir('Mojarra en Salsa',22000)">Pedir</button>
-</div>
+    <div id="ordersContainer">Cargando pedidos...</div>
+  </section>
 
-<div class="card">
-<h3>Mojarra Frita</h3>
-<p>$20.000</p>
-<span class="status available" id="status5">Disponible</span>
-<button class="toggle" onclick="toggle(5)">Cambiar estado</button>
-<button class="order-btn" onclick="pedir('Mojarra Frita',20000)">Pedir</button>
-</div>
+  <section id="dashboardPage" class="page">
+    <div class="hero">
+      <div class="top-row">
+        <div>
+          <h2>Panel del Dueño</h2>
+          <p>Resumen de pedidos y ventas.</p>
+        </div>
+        <button onclick="loadSummary()">Actualizar resumen</button>
+      </div>
+    </div>
 
-<div class="card">
-<h3>Bocachico en Salsa</h3>
-<p>$23.000</p>
-<span class="status available" id="status6">Disponible</span>
-<button class="toggle" onclick="toggle(6)">Cambiar estado</button>
-<button class="order-btn" onclick="pedir('Bocachico en Salsa',23000)">Pedir</button>
-</div>
-
-<div class="card">
-<h3>Bocachico Frito</h3>
-<p>$21.000</p>
-<span class="status available" id="status7">Disponible</span>
-<button class="toggle" onclick="toggle(7)">Cambiar estado</button>
-<button class="order-btn" onclick="pedir('Bocachico Frito',21000)">Pedir</button>
-</div>
-
-<div class="card">
-<h3>Mapará en Salsa</h3>
-<p>$24.000</p>
-<span class="status available" id="status8">Disponible</span>
-<button class="toggle" onclick="toggle(8)">Cambiar estado</button>
-<button class="order-btn" onclick="pedir('Mapará en Salsa',24000)">Pedir</button>
-</div>
+    <div id="summaryContainer" class="stats"></div>
+  </section>
 
 </div>
-</section>
 
-<!-- PANEL -->
-<section id="panelPage" class="page panel">
-<h2>Pedidos 👨‍🍳</h2>
-<div id="listaPedidos"></div>
-</section>
+<div id="orderModal" class="modal">
+  <div class="modal-box">
+    <h2>Hacer pedido</h2>
+    <p id="selectedProductText"></p>
 
-<!-- MODAL -->
-<div id="modalPago">
-<div class="modal-box">
-<h3>Pagar con Nequi 💳</h3>
-<h2>3001234567</h2>
-<button onclick="cerrarModal()">OK</button>
+    <label>Tu nombre</label>
+    <input id="customerName" placeholder="Escribe tu nombre">
+
+    <label>Tipo de pedido</label>
+    <select id="deliveryType" onchange="toggleDeliveryFields()">
+      <option value="mesa">Mesa</option>
+      <option value="domicilio">Domicilio</option>
+    </select>
+
+    <div id="tableBox">
+      <label>Número de mesa</label>
+      <input id="tableNumber" placeholder="Ej: 4">
+    </div>
+
+    <div id="addressBox" style="display:none;">
+      <label>Dirección</label>
+      <input id="address" placeholder="Dirección exacta">
+
+      <label>Celular</label>
+      <input id="phone" placeholder="Número de celular">
+    </div>
+
+    <label>Método de pago</label>
+    <select id="paymentMethod" onchange="toggleNequiInfo()">
+      <option value="Contra entrega">Contra entrega</option>
+      <option value="Nequi">Nequi</option>
+    </select>
+
+    <div id="nequiInfo" style="display:none;background:#f7f3eb;padding:12px;border-radius:10px;margin-bottom:12px;">
+      <strong>Nequi:</strong> 300 123 4567
+    </div>
+
+    <button onclick="submitOrder()">Confirmar pedido</button>
+    <button class="outline" onclick="closeOrderModal()">Cancelar</button>
+  </div>
 </div>
-</div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<div id="toast" class="toast"></div>
 
 <script>
-let role="cliente";
+const API_BASE = "https://e39ddcd1-8851-4167-86d5-6e55af266b36-00-2v149w6tac9ei.kirk.replit.dev/api";
 
-const cocinero="chambofabian58@gmail.com";
-const dueno="         ";
+const COCINERO_EMAIL = "chambofabian58@gmail.com";
+const CREADOR_EMAIL = "guerraroncancio@gmail.com";
+const CREADOR_PASS = "032623";
 
-/* 🔥 CREADOR OCULTO */
-const creador="guerraroncancio@gmail.com";
-const creadorPass="032623";
+let currentRole = "cliente";
+let currentUserName = "cliente";
+let selectedItem = null;
 
-let pedidos=JSON.parse(localStorage.getItem("pedidos"))||[];
-
-/* NAV */
-function showPage(page){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-let el=document.getElementById(page);
-if(el) el.classList.add("active");
+function money(value){
+  return "$ " + Number(value).toLocaleString("es-CO");
 }
 
-/* LOGIN */
+function toast(message){
+  const el = document.getElementById("toast");
+  el.innerText = message;
+  el.style.display = "block";
+
+  setTimeout(() => {
+    el.style.display = "none";
+  }, 2800);
+}
+
+function showPage(pageId){
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
+
+  document.getElementById(pageId).classList.add("active");
+
+  if(pageId === "menuPage") loadMenu();
+  if(pageId === "kitchenPage") loadOrders();
+  if(pageId === "dashboardPage") loadSummary();
+}
+
+async function api(path, options = {}){
+  const response = await fetch(API_BASE + path, {
+    headers:{
+      "Content-Type":"application/json",
+      ...(options.headers || {})
+    },
+    ...options
+  });
+
+  if(!response.ok){
+    const text = await response.text();
+    throw new Error(text || "Error en la solicitud");
+  }
+
+  if(response.status === 204) return null;
+
+  return response.json();
+}
+
 function login(){
-let email=document.getElementById("email").value;
+  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+  const pass = document.getElementById("loginPassword").value;
 
-if(!email) return toast("Ingresa correo ❌");
-
-email=email.trim().toLowerCase();
-
-let pass = "";
-
-/* 🔥 SOLO EL CREADOR PIDE CONTRASEÑA */
-if(email === creador){
-pass = prompt("Contraseña del creador:");
-if(!pass) return toast("Ingresa contraseña ❌");
-
-if(pass !== creadorPass){
-return toast("Contraseña incorrecta ❌");
-}
-role="creador";
-}
-else if(email===cocinero){
-role="cocinero";
-}
-else if(email===dueno){
-role="dueno";
-}
-else{
-role="cliente";
-}
-
-document.getElementById("login").style.display="none";
-
-/* BADGE */
-let r=document.getElementById("roleText");
-if(r){
-r.innerText=role;
-r.className="role-badge "+role;
-}
-
-/* BOTONES */
-document.querySelectorAll(".toggle").forEach(b=>{
-b.style.display=(role!=="cliente")?"block":"none";
-});
-
-render();
-}
-
-/* PERMISOS */
-function permitido(){
-return role==="cocinero" || role==="dueno" || role==="creador";
-}
-
-/* PEDIR */
-function pedir(producto,precio){
-
-let nombre = prompt("Tu nombre:");
-if(!nombre) return;
-
-let tipo = prompt("Escribe 1 para DOMICILIO o 2 para MESA");
-if(!tipo) return;
-
-let direccion = "";
-let telefono = "";
-let mesa = "";
-
-if(tipo === "1"){
-    direccion = prompt("📍 Dirección exacta:");
-    if(!direccion) return;
-
-    telefono = prompt("📱 Número de celular:");
-    if(!telefono) return;
-}
-
-else if(tipo === "2"){
-    mesa = prompt("🍽 Número de mesa:");
-    if(!mesa) return;
-}
-
-else{
-    alert("Debes escribir 1 o 2");
+  if(!email){
+    toast("Ingresa tu correo");
     return;
+  }
+
+  if(email === CREADOR_EMAIL){
+    if(!pass){
+      document.getElementById("passwordLabel").style.display = "block";
+      document.getElementById("loginPassword").style.display = "block";
+      toast("Ingresa la contraseña del creador");
+      return;
+    }
+
+    if(pass !== CREADOR_PASS){
+      toast("Contraseña incorrecta");
+      return;
+    }
+
+    currentRole = "creador";
+    currentUserName = "Creador";
+  }else if(email === COCINERO_EMAIL){
+    currentRole = "cocinero";
+    currentUserName = "Cocinero";
+  }else{
+    currentRole = "cliente";
+    currentUserName = email.split("@")[0];
+  }
+
+  updateRoleButtons();
+
+  toast("Entraste como " + currentRole);
+
+  if(currentRole === "cliente"){
+    showPage("menuPage");
+  }else{
+    showPage("kitchenPage");
+  }
 }
 
-let metodo = prompt("1.Nequi 2.Contra entrega");
-if(!metodo) return;
+function updateRoleButtons(){
+  const staffButtons = document.querySelectorAll(".staff-only");
+  const ownerButtons = document.querySelectorAll(".owner-only");
 
-let pago = (metodo == "1") ? "Nequi" : "Contra entrega";
+  staffButtons.forEach(btn => {
+    btn.style.display = ["cocinero", "dueno", "creador"].includes(currentRole) ? "inline-block" : "none";
+  });
 
-pedidos.unshift({
-    id: Date.now(),
-    nombre,
-    producto,
-    precio,
-    tipoEntrega: tipo,
-    direccion,
-    telefono,
-    mesa: mesa,
-    pago,
-    estado: "🆕 NUEVO PEDIDO",
-    tiempo: "⏳ Sin asignar",
-    atendidoPor: "sin asignar"
-});
-
-localStorage.setItem("pedidos", JSON.stringify(pedidos));
-
-/* 🔔 NOTIFICACIÓN CLIENTE */
-toast("📢 " + nombre + ", tu pedido de " + producto + " fue enviado a Brisas del Mar");
-
-/* 💳 SI ES NEQUI */
-if(pago === "Nequi"){
-let m = document.getElementById("modalPago");
-if(m) m.style.display = "flex";
-
-/* ACTUALIZA EL NEQUI EN PANTALLA */
-let nequiText = document.getElementById("nequiText");
-if(nequiText){
-nequiText.innerText = nequiRestaurante;
-}
+  ownerButtons.forEach(btn => {
+    btn.style.display = ["dueno", "creador"].includes(currentRole) ? "inline-block" : "none";
+  });
 }
 
-render();
+async function loadMenu(){
+  const container = document.getElementById("menuContainer");
+  container.innerHTML = "Cargando menú...";
+
+  try{
+    const items = await api("/menu");
+
+    if(!items.length){
+      container.innerHTML = "<p>No hay platos cargados.</p>";
+      return;
+    }
+
+    const grouped = {};
+
+    items.forEach(item => {
+      if(!grouped[item.category]){
+        grouped[item.category] = [];
+      }
+
+      grouped[item.category].push(item);
+    });
+
+    let html = "";
+
+    Object.keys(grouped).forEach(category => {
+      html += `<h2 class="category-title">${category}</h2>`;
+      html += `<div class="grid">`;
+
+      grouped[category].forEach(item => {
+        const itemData = encodeURIComponent(JSON.stringify(item));
+
+        html += `
+          <div class="card">
+            <h3>${item.name}</h3>
+            <div class="price">${money(item.price)}</div>
+
+            <span class="badge ${item.available ? "available" : "soldout"}">
+              ${item.available ? "Disponible" : "Agotado"}
+            </span>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
+              <button ${!item.available ? "disabled" : ""} onclick="openOrderModalFromEncoded('${itemData}')">
+                Pedir
+              </button>
+
+              ${["cocinero", "dueno", "creador"].includes(currentRole) ? `
+                <button class="secondary" onclick="toggleMenuItem(${item.id})">
+                  Cambiar estado
+                </button>
+              ` : ""}
+            </div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+    });
+
+    container.innerHTML = html;
+  }catch(error){
+    container.innerHTML = "<p>No se pudo cargar el menú. Revisa que la app esté activa o publicada.</p>";
+    toast("Error cargando menú");
+  }
 }
 
-/* RENDER */
-function render(){
-let cont=document.getElementById("listaPedidos");
-if(!cont) return;
-
-cont.innerHTML="";
-
-if(!Array.isArray(pedidos)){
-pedidos=[];
-localStorage.setItem("pedidos",JSON.stringify(pedidos));
+function openOrderModalFromEncoded(encoded){
+  const item = JSON.parse(decodeURIComponent(encoded));
+  openOrderModal(item);
 }
 
-pedidos.forEach(p=>{
-if(!p) return;
+async function toggleMenuItem(id){
+  try{
+    await api("/menu/" + id + "/toggle", {
+      method:"PATCH"
+    });
 
-cont.innerHTML+=`
-<div class="pedido">
-<strong>${p.nombre}</strong><br>
-
-🐟 ${p.producto}<br>
-
-📍 ${p.tipoEntrega === "DOMICILIO"
-? "Dirección: " + (p.direccion || "Sin dirección")
-: "Mesa: " + (p.mesa || "N/A")
-}<br>
-
-👨‍🍳 ${p.atendidoPor || "sin asignar"}<br>
-💳 ${p.pago || ""}<br>
-📌 ${p.estado || "En proceso"}<br>
-⏱️ ${p.tiempo || "Sin asignar"}
-
-${role!=="cliente" ? `
-<br>
-<button onclick="listo(${p.id})">✔ Listo</button>
-<button onclick="tiempo(${p.id})">⏳ Tiempo</button>
-<button onclick="cancelar(${p.id})" class="delete-btn">❌ Cancelar</button>
-` : ``}
-
-</div>
-`;
-});
+    toast("Estado actualizado");
+    loadMenu();
+  }catch(error){
+    toast("No se pudo cambiar el estado");
+  }
 }
 
+function openOrderModal(item){
+  selectedItem = item;
 
-/* LISTO */
-function listo(id){
-if(!permitido()) return toast("Sin permisos ❌");
+  document.getElementById("selectedProductText").innerHTML =
+    `<strong>${item.name}</strong> - ${money(item.price)}`;
 
-let p=pedidos.find(x=>x.id===id);
-if(!p) return;
+  document.getElementById("customerName").value = "";
+  document.getElementById("deliveryType").value = "mesa";
+  document.getElementById("tableNumber").value = "";
+  document.getElementById("address").value = "";
+  document.getElementById("phone").value = "";
+  document.getElementById("paymentMethod").value = "Contra entrega";
 
-p.estado="Listo";
+  toggleDeliveryFields();
+  toggleNequiInfo();
 
-localStorage.setItem("pedidos",JSON.stringify(pedidos));
-render();
-toast("Pedido listo ✔");
+  document.getElementById("orderModal").classList.add("active");
 }
 
-/* TIEMPO */
-function tiempo(id){
-if(!permitido()) return toast("Sin permisos ❌");
-
-let p=pedidos.find(x=>x.id===id);
-if(!p) return;
-
-let t=prompt("Tiempo en minutos:");
-if(!t) return;
-
-p.tiempo=t+" min";
-
-localStorage.setItem("pedidos",JSON.stringify(pedidos));
-render();
-toast("Tiempo actualizado ⏳");
+function closeOrderModal(){
+  document.getElementById("orderModal").classList.remove("active");
 }
 
-/* CANCELAR */
-function cancelar(id){
-if(!permitido()) return toast("Sin permisos ❌");
+function toggleDeliveryFields(){
+  const type = document.getElementById("deliveryType").value;
 
-pedidos=pedidos.filter(p=>p.id!==id);
+  document.getElementById("tableBox").style.display =
+    type === "mesa" ? "block" : "none";
 
-localStorage.setItem("pedidos",JSON.stringify(pedidos));
-render();
-toast("Pedido cancelado ❌");
+  document.getElementById("addressBox").style.display =
+    type === "domicilio" ? "block" : "none";
 }
 
-/* TOGGLE */
-function toggle(id){
-if(!permitido()) return toast("No tienes permisos ❌");
+function toggleNequiInfo(){
+  const method = document.getElementById("paymentMethod").value;
 
-let s=document.getElementById("status"+id);
-if(!s) return;
-
-if(s.classList.contains("available")){
-s.classList.replace("available","soldout");
-s.innerText="Agotado";
-}else{
-s.classList.replace("soldout","available");
-s.innerText="Disponible";
-}
+  document.getElementById("nequiInfo").style.display =
+    method === "Nequi" ? "block" : "none";
 }
 
-/* MODAL */
-function cerrarModal(){
-let m=document.getElementById("modalPago");
-if(m) m.style.display="none";
+async function submitOrder(){
+  if(!selectedItem) return;
+
+  const customerName = document.getElementById("customerName").value.trim();
+  const deliveryType = document.getElementById("deliveryType").value;
+  const tableNumber = document.getElementById("tableNumber").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const paymentMethod = document.getElementById("paymentMethod").value;
+
+  if(!customerName){
+    toast("Escribe tu nombre");
+    return;
+  }
+
+  if(deliveryType === "mesa" && !tableNumber){
+    toast("Escribe el número de mesa");
+    return;
+  }
+
+  if(deliveryType === "domicilio" && (!address || !phone)){
+    toast("Escribe dirección y celular");
+    return;
+  }
+
+  try{
+    await api("/orders", {
+      method:"POST",
+      body:JSON.stringify({
+        customerName:customerName,
+        product:selectedItem.name,
+        price:selectedItem.price,
+        deliveryType:deliveryType,
+        address:deliveryType === "domicilio" ? address : "",
+        phone:deliveryType === "domicilio" ? phone : "",
+        tableNumber:deliveryType === "mesa" ? tableNumber : "",
+        paymentMethod:paymentMethod
+      })
+    });
+
+    closeOrderModal();
+    toast("Pedido enviado a cocina");
+  }catch(error){
+    toast("No se pudo enviar el pedido");
+  }
 }
 
-/* TOAST */
-function toast(msg){
-let t=document.getElementById("toast");
-if(!t) return;
+async function loadOrders(){
+  if(!["cocinero", "dueno", "creador"].includes(currentRole)){
+    toast("No tienes permiso");
+    showPage("menuPage");
+    return;
+  }
 
-t.innerText=msg;
-t.style.display="block";
+  const container = document.getElementById("ordersContainer");
+  container.innerHTML = "Cargando pedidos...";
 
-setTimeout(()=>t.style.display="none",2500);
+  try{
+    const orders = await api("/orders");
+
+    if(!orders.length){
+      container.innerHTML = "<p>No hay pedidos todavía.</p>";
+      return;
+    }
+
+    container.innerHTML = orders.map(order => `
+      <div class="order">
+        <strong>Pedido #${order.id}</strong><br>
+        Cliente: ${order.customerName}<br>
+        Producto: ${order.product}<br>
+        Precio: ${money(order.price)}<br>
+        Tipo: ${order.deliveryType}<br>
+
+        ${
+          order.deliveryType === "domicilio"
+          ? `Dirección: ${order.address || "Sin dirección"}<br>Celular: ${order.phone || "Sin celular"}<br>`
+          : `Mesa: ${order.tableNumber || "N/A"}<br>`
+        }
+
+        Pago: ${order.paymentMethod}<br>
+        Estado: ${order.status}<br>
+        Tiempo: ${order.estimatedTime || "Sin asignar"}<br>
+        Atendido por: ${order.attendedBy || "Sin asignar"}<br>
+
+        <div class="order-actions">
+          <button onclick="updateOrderStatus(${order.id}, 'en_proceso')">En proceso</button>
+          <button onclick="setOrderTime(${order.id})">Tiempo</button>
+          <button onclick="updateOrderStatus(${order.id}, 'listo')">Listo</button>
+          <button class="danger" onclick="deleteOrder(${order.id})">Cancelar</button>
+        </div>
+      </div>
+    `).join("");
+  }catch(error){
+    container.innerHTML = "<p>No se pudieron cargar los pedidos.</p>";
+  }
 }
 
-/* =========================
-   🔧 FIX SISTEMA COCINA
-========================= */
+async function updateOrderStatus(id, status){
+  try{
+    await api("/orders/" + id + "/status", {
+      method:"PATCH",
+      body:JSON.stringify({
+        status:status,
+        attendedBy:currentUserName
+      })
+    });
 
-function permitido(){
-return role === "cocinero" || role === "dueno" || role === "creador";
+    toast("Pedido actualizado");
+    loadOrders();
+  }catch(error){
+    toast("No se pudo actualizar");
+  }
 }
 
-function listo(id){
-if(!permitido()) return toast("Sin permisos ❌");
+async function setOrderTime(id){
+  const time = prompt("Tiempo estimado en minutos:");
 
-let p = pedidos.find(x => x.id === id);
-if(!p) return;
+  if(!time) return;
 
-p.estado = "🍽 LISTO";
-save();
-render();
-toast("Pedido listo ✔");
+  try{
+    await api("/orders/" + id + "/status", {
+      method:"PATCH",
+      body:JSON.stringify({
+        estimatedTime:time + " min",
+        status:"en_proceso",
+        attendedBy:currentUserName
+      })
+    });
+
+    toast("Tiempo asignado");
+    loadOrders();
+  }catch(error){
+    toast("No se pudo asignar tiempo");
+  }
 }
 
-function tiempo(id){
-if(!permitido()) return toast("Sin permisos ❌");
+async function deleteOrder(id){
+  if(!confirm("¿Cancelar este pedido?")) return;
 
-let p = pedidos.find(x => x.id === id);
-if(!p) return;
+  try{
+    await api("/orders/" + id, {
+      method:"DELETE"
+    });
 
-let t = prompt("Tiempo en minutos:");
-if(!t) return;
-
-p.tiempo = t + " min";
-save();
-render();
-toast("Tiempo actualizado ⏳");
+    toast("Pedido cancelado");
+    loadOrders();
+  }catch(error){
+    toast("No se pudo cancelar");
+  }
 }
 
-function cancelar(id){
-if(!permitido()) return toast("Sin permisos ❌");
+async function loadSummary(){
+  if(!["dueno", "creador"].includes(currentRole)){
+    toast("No tienes permiso");
+    showPage("menuPage");
+    return;
+  }
 
-pedidos = pedidos.filter(p => p.id !== id);
-save();
-render();
-toast("Pedido cancelado ❌");
+  const container = document.getElementById("summaryContainer");
+  container.innerHTML = "Cargando resumen...";
+
+  try{
+    const s = await api("/orders/summary");
+
+    container.innerHTML = `
+      <div class="stat">
+        <h3>${s.total}</h3>
+        <p>Total pedidos</p>
+      </div>
+
+      <div class="stat">
+        <h3>${s.nuevo}</h3>
+        <p>Nuevos</p>
+      </div>
+
+      <div class="stat">
+        <h3>${s.enProceso}</h3>
+        <p>En proceso</p>
+      </div>
+
+      <div class="stat">
+        <h3>${s.listo}</h3>
+        <p>Listos</p>
+      </div>
+
+      <div class="stat">
+        <h3>${money(s.totalRevenue)}</h3>
+        <p>Ventas</p>
+      </div>
+    `;
+  }catch(error){
+    container.innerHTML = "<p>No se pudo cargar el resumen.</p>";
+  }
 }
 
-function toggle(id){
-if(!permitido()) return toast("No tienes permisos ❌");
+setInterval(() => {
+  const kitchenVisible = document.getElementById("kitchenPage").classList.contains("active");
 
-let s = document.getElementById("status"+id);
-if(!s) return;
+  if(kitchenVisible && ["cocinero", "dueno", "creador"].includes(currentRole)){
+    loadOrders();
+  }
+}, 6000);
 
-if(s.classList.contains("available")){
-s.classList.remove("available");
-s.classList.add("soldout");
-s.innerText = "Agotado";
-}else{
-s.classList.remove("soldout");
-s.classList.add("available");
-s.innerText = "Disponible";
-}
-}
-
-function render(){
-let cont = document.getElementById("listaPedidos");
-if(!cont) return;
-
-cont.innerHTML = "";
-
-if(!Array.isArray(pedidos)){
-pedidos = [];
-localStorage.setItem("pedidos", JSON.stringify(pedidos));
-}
-
-pedidos.forEach(p => {
-if(!p) return;
-
-cont.innerHTML += `
-<div class="pedido">
-<strong>${p.nombre}</strong><br>
-🐟 ${p.producto}<br>
-
-📍 ${
-p.tipoEntrega === "DOMICILIO"
-? "Dirección: " + (p.direccion || "Sin dirección")
-: "Mesa: " + (p.mesa || "N/A")
-}<br>
-
-💳 ${p.pago || "Sin pago"}<br>
-📌 ${p.estado || "En proceso"}<br>
-⏱️ ${p.tiempo || "Sin tiempo"}
-
-${permitido() ? `
-<br>
-<button onclick="listo(${p.id})">✔ Listo</button>
-<button onclick="tiempo(${p.id})">⏳ Tiempo</button>
-<button onclick="cancelar(${p.id})" class="delete-btn">❌ Cancelar</button>
-` : ``}
-
-</div>
-`;
-});
-}
-
-setInterval(render, 2000);
-
+loadMenu();
 </script>
 
 </body>

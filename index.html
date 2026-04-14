@@ -86,13 +86,19 @@ input{
 
 /* BOTONES */
 button{
-    margin-top:10px;
     padding:10px;
     border:none;
     border-radius:10px;
+    cursor:pointer;
     background:#22c55e;
     color:white;
-    cursor:pointer;
+    width:100%;
+    margin-top:8px;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#16a34a;
 }
 
 /* HERO */
@@ -440,49 +446,55 @@ return role==="cocinero" || role==="dueno" || role==="creador";
 /* PEDIR */
 function pedir(producto,precio){
 
-let nombre=prompt("Tu nombre:");
+let nombre = prompt("Tu nombre:");
 if(!nombre) return;
 
-let tipo = prompt("¿DOMICILIO o MESA?");
+let tipo = prompt("Escribe 1 para DOMICILIO o 2 para MESA");
 if(!tipo) return;
-
-tipo = tipo.toUpperCase();
 
 let direccion = "";
 let telefono = "";
+let mesa = "";
 
-if(tipo === "DOMICILIO"){
-direccion = prompt("📍 Dirección exacta:");
-if(!direccion) return;
+if(tipo === "1"){
+    direccion = prompt("📍 Dirección exacta:");
+    if(!direccion) return;
 
-telefono = prompt("📱 Número de celular:");
-if(!telefono) return;
+    telefono = prompt("📱 Número de celular:");
+    if(!telefono) return;
+}
+
+else if(tipo === "2"){
+    mesa = prompt("🍽 Número de mesa:");
+    if(!mesa) return;
+}
+
+else{
+    alert("Debes escribir 1 o 2");
+    return;
 }
 
 let metodo = prompt("1.Nequi 2.Contra entrega");
 if(!metodo) return;
 
-let pago = (metodo=="1") ? "Nequi" : "Contra entrega";
+let pago = (metodo == "1") ? "Nequi" : "Contra entrega";
 
-/* 💳 NEQUI DEL RESTAURANTE */
-const nequiRestaurante = "3102286030";
-
-/* 🧾 CREAR PEDIDO */
 pedidos.unshift({
-id:Date.now(),
-nombre,
-producto,
-precio,
-tipoEntrega:tipo,
-direccion,
-telefono,
-pago,
-estado:"🆕 NUEVO PEDIDO",
-tiempo:"⏳ Sin asignar",
-atendidoPor:"sin asignar"
+    id: Date.now(),
+    nombre,
+    producto,
+    precio,
+    tipoEntrega: tipo,
+    direccion,
+    telefono,
+    mesa: mesa,
+    pago,
+    estado: "🆕 NUEVO PEDIDO",
+    tiempo: "⏳ Sin asignar",
+    atendidoPor: "sin asignar"
 });
 
-localStorage.setItem("pedidos",JSON.stringify(pedidos));
+localStorage.setItem("pedidos", JSON.stringify(pedidos));
 
 /* 🔔 NOTIFICACIÓN CLIENTE */
 toast("📢 " + nombre + ", tu pedido de " + producto + " fue enviado a Brisas del Mar");

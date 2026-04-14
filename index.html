@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯🐟</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+}
+
+/* TOP BAR */
+.topbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:12px 15px;
+    background:#020617;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+    font-size:14px;
+    border-bottom:1px solid #1e293b;
+}
+
+.role-badge{
+    background:#22c55e;
+    padding:5px 10px;
+    border-radius:10px;
+    font-size:12px;
+}
+
+.role-badge.cocinero{background:#3b82f6;}
+.role-badge.dueno{background:#f59e0b;}
+
+/* PANTALLAS */
+.page{
+    display:none;
+    min-height:100vh;
+    padding-top:60px;
+}
+.active{display:block;}
+
+/* LOGIN */
+.login{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#020617;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.login-box{
+    background:#1e293b;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    width:90%;
+    max-width:300px;
+}
+
+input{
+    padding:10px;
+    width:100%;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+}
+
+/* BOTONES */
+button{
+    margin-top:10px;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    cursor:pointer;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),
+    url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+/* MENU */
+.menu{padding:20px;}
+
+.card{
+    background:#1e293b;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:10px;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:10px;
+    margin-top:5px;
+}
+
+.available{background:#22c55e;}
+.soldout{background:#ef4444;}
+
+.toggle{display:none;background:#f59e0b;}
+.order-btn{background:#3b82f6;}
+
+/* PANEL */
+.panel{padding:20px;background:#020617;}
+
+.pedido{
+    background:#334155;
+    padding:10px;
+    margin-bottom:10px;
+    border-radius:10px;
+}
+
+.delete-btn{
+    background:#ef4444;
+    margin-top:5px;
+}
+
+/* MODAL */
+#modalPago{
+    display:none;
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.8);
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+}
+
+.modal-box{
+    background:#1e293b;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    width:90%;
+    max-width:300px;
+}
+
+/* TOAST */
+.toast{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#22c55e;
+    padding:10px 20px;
+    border-radius:10px;
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <div>🐟 𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯</div>
+    <div id="roleText" class="role-badge">cliente</div>
+</div>
+
+<!-- LOGIN -->
+<div class="login" id="login"
+style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100dvh;
+
+/* 🔥 FONDO RESPONSIVE */
+background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+url('https://api.dix.lat/media/img_1776131911102_jbdcIitE5.jpg');
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999;
+padding:15px;
+">
+
+    <div style="
+    width:100%;
+    max-width:350px;
+
+/* 🔥 ADAPTADO A MÓVIL */
+    background:rgba(30,41,59,0.75);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    color:white;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    ">
+
+        <h2 style="margin-bottom:10px;">Ingresar</h2>
+
+        <input id="email" placeholder="Correo"
+        style="
+        width:100%;
+        padding:12px;
+        margin-top:10px;
+        border:none;
+        border-radius:10px;
+        font-size:16px;
+        ">
+
+        <button onclick="login()"
+        style="
+        margin-top:15px;
+        padding:12px;
+        border:none;
+        border-radius:10px;
+        background:#22c55e;
+        color:white;
+        width:100%;
+        font-size:16px;
+        cursor:pointer;
+        ">
+        Entrar
+        </button>
+
+    </div>
+
+</div>
+
+<!-- HOME -->
+<section id="home" class="page active">
+    <div class="hero">
+        <h1>𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 🐟</h1>
+        <button onclick="showPage('menuPage')">Ver menú</button>
+        <button onclick="showPage('panelPage')">Cocina</button>
+    </div>
+</section>
+
+<!-- MENU -->
+<section id="menuPage" class="page">
+<div class="menu">
+
+
+<!-- 🔥 MENÚ GOSA COMPLETO INTEGRADO -->
+<div class="menu">
+
+<h2 style="margin:20px 0;">🐟 𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 𝔐𝔢𝔫𝔲́ </h2>
+
+<div class="card">
+<h3>Cazuela de Mariscos</h3>
+<p>$30.000</p>
+<span class="status available" id="status1">Disponible</span>
+<button class="toggle" onclick="toggle(1)">Cambiar estado</button>
+<button class="order-btn" onclick="pedir('Cazuela de Mariscos',30000)">Pedir</button>
+</div>
+
+<div class="card">
+<h3>Arroz de Camarón</h3>
+<p>$28.000</p>
+<span class="status available" id="status2">Disponible</span>
+<button class="toggle" onclick="toggle(2)">Cambiar estado</button>
+<button class="order-btn" onclick="pedir('Arroz de Camarón',28000)">Pedir</button>
+</div>
+
+<div class="card">
+<h3>Viudo de Capaz</h3>
+<p>$25.000</p>
+<span class="status available" id="status3">Disponible</span>
+<button class="toggle" onclick="toggle(3)">Cambiar estado</button>
+<button class="order-btn" onclick="pedir('Viudo de Capaz',25000)">Pedir</button>
+</div>
+
+<div class="card">
+<h3>Mojarra en Salsa</h3>
+<p>$22.000</p>
+<span class="status available" id="status4">Disponible</span>
+<button class="toggle" onclick="toggle(4)">Cambiar estado</button>
+<button class="order-btn" onclick="pedir('Mojarra en Salsa',22000)">Pedir</button>
+</div>
+
+<div class="card">
+<h3>Mojarra Frita</h3>
+<p>$20.000</p>
+<span class="status available" id="status5">Disponible</span>
+<button class="toggle" onclick="toggle(5)">Cambiar estado</button>
+<button class="order-btn" onclick="pedir('Mojarra Frita',20000)">Pedir</button>
+</div>
+
+<div class="card">
+<h3>Bocachico en Salsa</h3>
+<p>$23.000</p>
+<span class="status available" id="status6">Disponible</span>
+<button class="toggle" onclick="toggle(6)">Cambiar estado</button>
+<button class="order-btn" onclick="pedir('Bocachico en Salsa',23000)">Pedir</button>
+</div>
+
+<div class="card">
+<h3>Bocachico Frito</h3>
+<p>$21.000</p>
+<span class="status available" id="status7">Disponible</span>
+<button class="toggle" onclick="toggle(7)">Cambiar estado</button>
+<button class="order-btn" onclick="pedir('Bocachico Frito',21000)">Pedir</button>
+</div>
+
+<div class="card">
+<h3>Mapará en Salsa</h3>
+<p>$24.000</p>
+<span class="status available" id="status8">Disponible</span>
+<button class="toggle" onclick="toggle(8)">Cambiar estado</button>
+<button class="order-btn" onclick="pedir('Mapará en Salsa',24000)">Pedir</button>
+</div>
+
+</div>
+</section>
+
+<!-- PANEL -->
+<section id="panelPage" class="page panel">
+<h2>Pedidos 👨‍🍳</h2>
+<div id="listaPedidos"></div>
+</section>
+
+<!-- MODAL -->
+<div id="modalPago">
+<div class="modal-box">
+<h3>Pagar con Nequi 💳</h3>
+<h2>3001234567</h2>
+<button onclick="cerrarModal()">OK</button>
+</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+let role="cliente";
+
+const cocinero="chambofabian58@gmail.com";
+const dueno="         ";
+
+/* 🔥 CREADOR OCULTO */
+const creador="guerraroncancio@gmail.com";
+const creadorPass="032623";
+
+let pedidos=JSON.parse(localStorage.getItem("pedidos"))||[];
+
+/* NAV */
+function showPage(page){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+let el=document.getElementById(page);
+if(el) el.classList.add("active");
+}
+
+/* LOGIN */
+function login(){
+let email=document.getElementById("email").value;
+
+if(!email) return toast("Ingresa correo ❌");
+
+email=email.trim().toLowerCase();
+
+let pass = "";
+
+/* 🔥 SOLO EL CREADOR PIDE CONTRASEÑA */
+if(email === creador){
+pass = prompt("Contraseña del creador:");
+if(!pass) return toast("Ingresa contraseña ❌");
+
+if(pass !== creadorPass){
+return toast("Contraseña incorrecta ❌");
+}
+role="creador";
+}
+else if(email===cocinero){
+role="cocinero";
+}
+else if(email===dueno){
+role="dueno";
+}
+else{
+role="cliente";
+}
+
+document.getElementById("login").style.display="none";
+
+/* BADGE */
+let r=document.getElementById("roleText");
+if(r){
+r.innerText=role;
+r.className="role-badge "+role;
+}
+
+/* BOTONES */
+document.querySelectorAll(".toggle").forEach(b=>{
+b.style.display=(role!=="cliente")?"block":"none";
+});
+
+render();
+}
+
+/* PERMISOS */
+function permitido(){
+return role==="cocinero" || role==="dueno" || role==="creador";
+}
+
+/* PEDIR */
+function pedir(producto,precio){
+
+let nombre=prompt("Tu nombre:");
+if(!nombre) return;
+
+let tipo = prompt("¿DOMICILIO o MESA?");
+if(!tipo) return;
+
+tipo = tipo.toUpperCase();
+
+let direccion = "";
+let telefono = "";
+
+if(tipo === "DOMICILIO"){
+direccion = prompt("📍 Dirección exacta:");
+if(!direccion) return;
+
+telefono = prompt("📱 Número de celular:");
+if(!telefono) return;
+}
+
+let metodo = prompt("1.Nequi 2.Contra entrega");
+if(!metodo) return;
+
+let pago = (metodo=="1") ? "Nequi" : "Contra entrega";
+
+/* 💳 NEQUI DEL RESTAURANTE */
+const nequiRestaurante = "3102286030";
+
+/* 🧾 CREAR PEDIDO */
+pedidos.unshift({
+id:Date.now(),
+nombre,
+producto,
+precio,
+tipoEntrega:tipo,
+direccion,
+telefono,
+pago,
+estado:"🆕 NUEVO PEDIDO",
+tiempo:"⏳ Sin asignar",
+atendidoPor:"sin asignar"
+});
+
+localStorage.setItem("pedidos",JSON.stringify(pedidos));
+
+/* 🔔 NOTIFICACIÓN CLIENTE */
+toast("📢 " + nombre + ", tu pedido de " + producto + " fue enviado a Brisas del Mar");
+
+/* 💳 SI ES NEQUI */
+if(pago === "Nequi"){
+let m = document.getElementById("modalPago");
+if(m) m.style.display = "flex";
+
+/* ACTUALIZA EL NEQUI EN PANTALLA */
+let nequiText = document.getElementById("nequiText");
+if(nequiText){
+nequiText.innerText = nequiRestaurante;
+}
+}
+
+render();
+}
+
+/* RENDER */
+function render(){
+let cont=document.getElementById("listaPedidos");
+if(!cont) return;
+
+cont.innerHTML="";
+
+if(!Array.isArray(pedidos)){
+pedidos=[];
+localStorage.setItem("pedidos",JSON.stringify(pedidos));
+}
+
+pedidos.forEach(p=>{
+if(!p) return;
+
+cont.innerHTML+=`
+<div class="pedido">
+<strong>${p.nombre}</strong><br>
+
+🐟 ${p.producto}<br>
+
+📍 ${p.tipoEntrega === "DOMICILIO"
+? "Dirección: " + (p.direccion || "Sin dirección")
+: "Mesa: " + (p.mesa || "N/A")
+}<br>
+
+👨‍🍳 ${p.atendidoPor || "sin asignar"}<br>
+💳 ${p.pago || ""}<br>
+📌 ${p.estado || "En proceso"}<br>
+⏱️ ${p.tiempo || "Sin asignar"}
+
+${role!=="cliente" ? `
+<br>
+<button onclick="listo(${p.id})">✔ Listo</button>
+<button onclick="tiempo(${p.id})">⏳ Tiempo</button>
+<button onclick="cancelar(${p.id})" class="delete-btn">❌ Cancelar</button>
+` : ``}
+
+</div>
+`;
+});
+}
+
+
+/* LISTO */
+function listo(id){
+if(!permitido()) return toast("Sin permisos ❌");
+
+let p=pedidos.find(x=>x.id===id);
+if(!p) return;
+
+p.estado="Listo";
+
+localStorage.setItem("pedidos",JSON.stringify(pedidos));
+render();
+toast("Pedido listo ✔");
+}
+
+/* TIEMPO */
+function tiempo(id){
+if(!permitido()) return toast("Sin permisos ❌");
+
+let p=pedidos.find(x=>x.id===id);
+if(!p) return;
+
+let t=prompt("Tiempo en minutos:");
+if(!t) return;
+
+p.tiempo=t+" min";
+
+localStorage.setItem("pedidos",JSON.stringify(pedidos));
+render();
+toast("Tiempo actualizado ⏳");
+}
+
+/* CANCELAR */
+function cancelar(id){
+if(!permitido()) return toast("Sin permisos ❌");
+
+pedidos=pedidos.filter(p=>p.id!==id);
+
+localStorage.setItem("pedidos",JSON.stringify(pedidos));
+render();
+toast("Pedido cancelado ❌");
+}
+
+/* TOGGLE */
+function toggle(id){
+if(!permitido()) return toast("No tienes permisos ❌");
+
+let s=document.getElementById("status"+id);
+if(!s) return;
+
+if(s.classList.contains("available")){
+s.classList.replace("available","soldout");
+s.innerText="Agotado";
+}else{
+s.classList.replace("soldout","available");
+s.innerText="Disponible";
+}
+}
+
+/* MODAL */
+function cerrarModal(){
+let m=document.getElementById("modalPago");
+if(m) m.style.display="none";
+}
+
+/* TOAST */
+function toast(msg){
+let t=document.getElementById("toast");
+if(!t) return;
+
+t.innerText=msg;
+t.style.display="block";
+
+setTimeout(()=>t.style.display="none",2500);
+}
+</script>
+
+</body>
+</html>

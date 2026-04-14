@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯🐟</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
 *{
     margin:0;
@@ -41,8 +43,7 @@ body{
     font-size:12px;
 }
 
-.role-badge.cocinero{background:#3b82f6;}
-.role-badge.dueno{background:#f59e0b;}
+.role-badge.creador{background:#f59e0b;}
 
 /* PANTALLAS */
 .page{
@@ -55,8 +56,10 @@ body{
 /* LOGIN */
 .login{
     position:fixed;
+    top:0;
+    left:0;
     width:100%;
-    height:100%;
+    height:100vh;
     background:#020617;
     display:flex;
     justify-content:center;
@@ -73,12 +76,14 @@ body{
     max-width:300px;
 }
 
-input{
+input, select{
     padding:10px;
     width:100%;
     margin-top:10px;
     border:none;
     border-radius:10px;
+    background:#334155;
+    color:white;
 }
 
 /* BOTONES */
@@ -91,6 +96,10 @@ button{
     color:white;
     cursor:pointer;
 }
+
+.btn-mesa{background:#3b82f6; margin:5px;}
+.btn-estado{background:#f59e0b;}
+.btn-eliminar{background:#ef4444;}
 
 /* HERO */
 .hero{
@@ -145,11 +154,22 @@ button{
     justify-content:space-between;
     align-items:center;
     margin-bottom:10px;
+    flex-wrap:wrap;
+    gap:10px;
 }
 
-.delete-btn{
-    background:#ef4444;
-    padding:8px 12px;
+.mesa-tag{
+    background:#3b82f6;
+    padding:4px 8px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:500;
+}
+
+.estado-tag{
+    background:#22c55e;
+    padding:4px 8px;
+    border-radius:8px;
     font-size:12px;
 }
 
@@ -157,9 +177,12 @@ button{
 #modalPago{
     display:none;
     position:fixed;
+    top:0;
+    left:0;
     width:100%;
     height:100%;
     background:rgba(0,0,0,0.8);
+    display:flex;
     justify-content:center;
     align-items:center;
     z-index:1000;
@@ -187,10 +210,9 @@ button{
     z-index:1001;
 }
 
-/* MOBILE FIX */
+/* RESPONSIVE */
 @media (max-width: 768px) {
-    .pedido-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .delete-btn { align-self: flex-end; }
+    .pedido-header { flex-direction: column; align-items: flex-start; }
 }
 </style>
 </head>
@@ -208,6 +230,11 @@ button{
     <div class="login-box">
         <h2>Ingresar</h2>
         <input id="email" placeholder="Correo" type="email">
+        <select id="mesaSelect" style="display:none;">
+            <option value="">Seleccionar mesa</option>
+            <option value="mesa1">Mesa 1</option>
+            <option value="mesa2">Mesa 2</option>
+        </select>
         <button onclick="login()">Entrar</button>
     </div>
 </div>
@@ -225,7 +252,7 @@ button{
 <section id="menuPage" class="page">
     <div class="menu">
         <h2>🐟 𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 𝔐𝔢𝔫𝔲́</h2>
-        
+
         <div class="card">
             <h3>Cazuela de Mariscos</h3>
             <p>$30.000</p>
@@ -292,20 +319,18 @@ button{
     </div>
 </section>
 
-<!-- PANEL COCINERO -->
+<!-- PANEL -->
 <section id="panelPage" class="page panel">
     <h2>👨‍🍳 Panel de Pedidos</h2>
     <div id="listaPedidos">
-        <div style="text-align:center; padding:40px; color:#94a3b8;">
-            🔄 Cargando pedidos...
-        </div>
+        <div style="text-align:center; padding:40px; color:#94a3b8;">🎉 No hay pedidos</div>
     </div>
 </section>
 
-<!-- MODAL PAGO -->
+<!-- MODAL -->
 <div id="modalPago">
     <div class="modal-box">
-        <h3>💳 Pagar con Nequi</h3>
+        <h3>Pagar con Nequi 💳</h3>
         <h2>3001234567</h2>
         <button onclick="cerrarModal()">OK ✓</button>
     </div>
@@ -315,126 +340,112 @@ button{
 <div class="toast" id="toast"></div>
 
 <script>
-let role = "cliente";
-let pedidos = [];
-const creador = "guerraroncancio@gmail.com";
-const creadorPass = "032623";
+let role="cliente";
+let userMesa="";
+let pedidos=[];
+const creador="guerraroncancio@gmail.com";
+const creadorPass="032623";
 
-// 🔥 CANAL EN TIEMPO REAL MEJORADO
-const canal = new BroadcastChannel("brisas_pedidos_v2");
+const canal = new BroadcastChannel("brisas_pedidos");
 
-// 🔥 RECIBIR PEDIDOS (FUNCIONA EN MÓVIL)
-canal.onmessage = (e) => {
-    if (e.data.type === "nuevo") {
-        agregarPedido(e.data.pedido);
-    } else if (e.data.type === "update") {
-        actualizarPedido(e.data.pedido);
+canal.onmessage = (e)=>{
+    if(e.data.type==="nuevo"){
+        pedidos.unshift(e.data.pedido);
+        guardar();
+        render();
+        toast("🔔 Nuevo pedido!");
+    } else if(e.data.type==="update"){
+        const index = pedidos.findIndex(p => p.id === e.data.pedido.id);
+        if(index !== -1){
+            pedidos[index] = e.data.pedido;
+            guardar();
+            render();
+        }
     }
 };
 
-function showPage(page) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+function showPage(page){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
     document.getElementById(page).classList.add("active");
-    
-    // 🔥 REFRESH AUTOMÁTICO AL CAMBIAR PÁGINA
-    if (page === "panelPage") {
-        renderPanel();
-    }
 }
 
-function login() {
-    let email = document.getElementById("email").value.toLowerCase().trim();
-    if (!email) return toast("Ingresa correo");
+function login(){
+    let email=document.getElementById("email").value.toLowerCase().trim();
+    if(!email) return toast("Ingresa correo");
 
-    if (email === creador) {
-        let pass = prompt("Contraseña del dueño:");
-        if (pass !== creadorPass) return toast("❌ Error contraseña");
-        role = "dueno";
+    if(email===creador){
+        let pass=prompt("Contraseña del creador:");
+        if(pass!==creadorPass) return toast("❌ Error contraseña");
+        role="creador";
         document.querySelectorAll('.toggle').forEach(btn => btn.style.display = 'block');
-    } else {
-        role = "cliente";
+        document.getElementById("roleText").className = "role-badge creador";
+    }else{
+        role="cliente";
+        document.getElementById("mesaSelect").style.display = "block";
+        let mesa = document.getElementById("mesaSelect").value;
+        if(!mesa) return toast("Selecciona mesa");
+        userMesa = mesa;
     }
 
-    document.getElementById("login").style.display = "none";
-    document.getElementById("roleText").textContent = role;
-    document.getElementById("roleText").className = `role-badge ${role}`;
+    document.getElementById("login").style.display="none";
+    document.getElementById("roleText").innerText=role;
     
     cargar();
-    renderPanel();
+    render();
 }
 
-function guardar() {
-    localStorage.setItem("brisas_pedidos", JSON.stringify(pedidos));
+function guardar(){
+    localStorage.setItem("pedidos",JSON.stringify(pedidos));
 }
 
-function cargar() {
+function cargar(){
     try {
-        pedidos = JSON.parse(localStorage.getItem("brisas_pedidos")) || [];
+        pedidos=JSON.parse(localStorage.getItem("pedidos"))||[];
     } catch {
-        pedidos = [];
+        pedidos=[];
     }
 }
 
-function agregarPedido(nuevoPedido) {
-    pedidos.unshift(nuevoPedido);
-    guardar();
-    renderPanel();
-    toast("🔔 Nuevo pedido recibido!");
-}
+function pedir(prod,precio){
+    if(role==="cliente" && !userMesa) return toast("Selecciona mesa primero");
 
-function actualizarPedido(pedidoActualizado) {
-    const index = pedidos.findIndex(p => p.id === pedidoActualizado.id);
-    if (index !== -1) {
-        pedidos[index] = pedidoActualizado;
-        guardar();
-        renderPanel();
-    }
-}
+    let nombre=prompt("👤 Nombre:");
+    if(!nombre) return toast("Nombre requerido");
 
-// 🔥 FUNCIÓN PEDIR MEJORADA (SINCRONIZACIÓN 100% MÓVIL)
-function pedir(prod, precio) {
-    let nombre = prompt("👤 Tu nombre:");
-    if (!nombre) return toast("❌ Nombre requerido");
+    const mesaText = userMesa ? `Mesa ${userMesa.replace('mesa','')}` : "Para llevar";
 
     const pedido = {
-        id: Date.now(),
-        nombre: nombre.trim(),
-        producto: prod,
-        precio: precio,
-        estado: "🆕 Nuevo",
+        id:Date.now(),
+        nombre:nombre.trim(),
+        mesa: mesaText,
+        producto:prod,
+        precio,
+        estado:"🆕 Nuevo",
         timestamp: new Date().toLocaleTimeString()
     };
 
-    // 🔥 AGREGAR LOCAL + BROADCAST INMEDIATO
-    agregarPedido(pedido);
-    
-    // 🔥 ENVIAR A TODAS LAS PESTAÑAS
+    pedidos.unshift(pedido);
+    guardar();
+
     canal.postMessage({
-        type: "nuevo",
-        pedido: pedido
+        type:"nuevo",
+        pedido
     });
 
-    if (confirm(`💰 Total: $${precio.toLocaleString()}\n¿Confirmas pago Nequi?`)) {
-        document.getElementById("modalPago").style.display = "flex";
+    if(confirm(`💰 Total: $${precio.toLocaleString()}\n${mesaText}\n¿Pagar Nequi?`)){
+        document.getElementById("modalPago").style.display="flex";
     }
-    
+
     toast("✅ Pedido enviado a cocina!");
 }
 
-// 🔥 RENDER PANEL OPTIMIZADO (FUNCIONA SIEMPRE)
-function renderPanel() {
+function render(){
     cargar();
-    const cont = document.getElementById("listaPedidos");
-    
-    if (!cont) return;
-    
-    if (pedidos.length === 0) {
-        cont.innerHTML = `
-            <div style="text-align:center; padding:40px; color:#94a3b8;">
-                <div style="font-size:24px; margin-bottom:10px;">🎉</div>
-                No hay pedidos pendientes
-            </div>
-        `;
+    let cont=document.getElementById("listaPedidos");
+    if(!cont) return;
+
+    if(pedidos.length===0){
+        cont.innerHTML='<div style="text-align:center; padding:40px; color:#94a3b8;"><div style="font-size:24px;margin-bottom:10px;">🎉</div>No hay pedidos</div>';
         return;
     }
 
@@ -443,82 +454,84 @@ function renderPanel() {
             <div class="pedido-header">
                 <div>
                     <b>${p.nombre}</b>
-                    <br><small>${p.timestamp}</small>
+                    <div class="mesa-tag">${p.mesa}</div>
+                    <small>${p.timestamp}</small>
                 </div>
-                ${role !== "cliente" ? `<button class="delete-btn" onclick="eliminarPedido(${p.id})">❌ Listo</button>` : ''}
+                ${role==="creador" ? `
+                    <div style="display:flex; gap:5px; flex-wrap:wrap;">
+                        <button class="btn-estado" onclick="cambiarEstado(${p.id},'🍳 En preparación')">Preparando</button>
+                        <button class="btn-estado" onclick="cambiarEstado(${p.id},'✅ Listo')">Listo</button>
+                        <button class="btn-eliminar" onclick="eliminar(${p.id})">❌</button>
+                    </div>
+                ` : ''}
             </div>
-            <div style="font-size:18px; margin:10px 0;">
-                🍽️ ${p.producto}
-            </div>
-            <div style="background:#22c55e; display:inline-block; padding:5px 12px; border-radius:20px; font-weight:500;">
-                ${p.estado}
-            </div>
-            ${role !== "cliente" ? `<div style="margin-top:10px; font-size:12px; color:#94a3b8;">ID: ${p.id}</div>` : ''}
+            <div style="font-size:18px; margin:10px 0;">🍽️ ${p.producto}</div>
+            <div class="estado-tag">${p.estado}</div>
+            ${role==="creador" ? `<div style="margin-top:10px; font-size:12px; color:#94a3b8;">ID: ${p.id}</div>` : ''}
         </div>
     `).join('');
 }
 
-function eliminarPedido(id) {
-    if (confirm("¿Pedido completado?")) {
-        pedidos = pedidos.filter(p => p.id !== id);
+function cambiarEstado(id, nuevoEstado){
+    const index = pedidos.findIndex(p => p.id === id);
+    if(index !== -1){
+        pedidos[index].estado = nuevoEstado;
         guardar();
         
-        // 🔥 NOTIFICAR ACTUALIZACIÓN
         canal.postMessage({
             type: "update",
-            pedidos: pedidos
+            pedido: pedidos[index]
         });
         
-        renderPanel();
-        toast("✅ Pedido completado");
+        render();
+        toast(`Estado: ${nuevoEstado}`);
     }
 }
 
-function toggle(id) {
-    if (role === "cliente") return;
-    
-    let s = document.getElementById("status" + id);
-    if (!s) return;
-
-    if (s.classList.contains("available")) {
-        s.classList.replace("available", "soldout");
-        s.innerText = "Agotado";
-    } else {
-        s.classList.replace("soldout", "available");
-        s.innerText = "Disponible";
+function eliminar(id){
+    if(confirm("¿Eliminar este pedido?")){
+        pedidos = pedidos.filter(p => p.id !== id);
+        guardar();
+        render();
+        toast("🗑️ Pedido eliminado");
     }
-    toast("Estado actualizado");
 }
 
-function cerrarModal() {
-    document.getElementById("modalPago").style.display = "none";
-}
+function toggle(id){
+    if(role==="cliente") return;
+    let s=document.getElementById("status"+id);
+    if(!s) return;
 
-function toast(msg) {
-    let t = document.getElementById("toast");
-    t.innerText = msg;
-    t.style.display = "block";
-    setTimeout(() => t.style.display = "none", 2500);
-}
-
-// 🔥 AUTO REFRESH MEJORADO
-setInterval(() => {
-    if (document.getElementById("panelPage").classList.contains("active")) {
-        renderPanel();
+    if(s.classList.contains("available")){
+        s.classList.replace("available","soldout");
+        s.innerText="Agotado";
+    }else{
+        s.classList.replace("soldout","available");
+        s.innerText="Disponible";
     }
-}, 2000);
+    toast("Estado del plato cambiado");
+}
 
-// 🔥 INICIALIZACIÓN
-window.onload = function() {
+function cerrarModal(){
+    document.getElementById("modalPago").style.display="none";
+}
+
+function toast(msg){
+    let t=document.getElementById("toast");
+    t.innerText=msg;
+    t.style.display="block";
+    setTimeout(()=>t.style.display="none",2500);
+}
+
+setInterval(()=>{
+    if(document.getElementById("panelPage").classList.contains("active")){
+        render();
+    }
+},2000);
+
+window.onload=()=>{
     cargar();
-    renderPanel();
-    
-    // Detectar visibilidad de página
-    document.addEventListener('visibilitychange', function() {
-        if (!document.hidden && document.getElementById("panelPage").classList.contains("active")) {
-            renderPanel();
-        }
-    });
+    render();
 };
 </script>
 

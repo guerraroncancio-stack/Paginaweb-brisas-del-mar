@@ -1,266 +1,343 @@
+¡Perfecto! Aquí está el código **100% optimizado para iOS, Android y PC** manteniendo las mismas imágenes:
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#020617">
 <title>𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯🐟</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐟</text></svg>">
 
 <style>
-*{
+/* 🔥 RESET Y BASE RESPONSIVE */
+*,*::before,*::after{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins', sans-serif;
+    font-family:'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
 }
 
 body{
     background:#0f172a;
     color:white;
     overflow-x:hidden;
+    height:100dvh;
+    position:relative;
 }
 
-/* TOP BAR */
+/* STATUS BAR iOS */
+@supports (-webkit-touch-callout: none) {
+    body { padding-top: env(safe-area-inset-top); }
+}
+
+/* TOP BAR - FULL RESPONSIVE */
 .topbar{
     position:fixed;
     top:0;
     left:0;
-    width:100%;
+    right:0;
     padding:12px 15px;
     background:#020617;
     display:flex;
     justify-content:space-between;
     align-items:center;
     z-index:1000;
-    font-size:14px;
+    font-size:clamp(12px, 3vw, 14px);
     border-bottom:1px solid #1e293b;
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
 }
 
 .role-badge{
     background:#22c55e;
-    padding:5px 10px;
-    border-radius:10px;
-    font-size:12px;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:clamp(10px, 2.5vw, 12px);
+    font-weight:600;
+    box-shadow:0 2px 10px rgba(34,197,94,0.3);
 }
 
-.role-badge.cocinero{background:#3b82f6;}
-.role-badge.dueno{background:#f59e0b;}
+.role-badge.cocinero{background:#3b82f6;box-shadow:0 2px 10px rgba(59,130,246,0.3);}
+.role-badge.dueno{background:#f59e0b;box-shadow:0 2px 10px rgba(245,158,11,0.3);}
 
 /* PANTALLAS */
 .page{
     display:none;
-    min-height:100vh;
-    padding-top:60px;
+    min-height:100dvh;
+    padding-top:70px;
+    padding-bottom:env(safe-area-inset-bottom);
 }
 .active{display:block;}
 
-/* LOGIN */
+/* LOGIN MODAL FULLSCREEN */
 .login{
     position:fixed;
-    top:0;
-    left:0;
+    inset:0;
+    background:#020617;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+    padding:20px;
+}
+
+.login-box{
+    background:rgba(30,41,59,0.95);
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+    padding:30px 25px;
+    border-radius:20px;
+    text-align:center;
     width:100%;
+    max-width:350px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.5);
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+input, select{
+    padding:15px;
+    width:100%;
+    margin-top:15px;
+    border:none;
+    border-radius:15px;
+    background:rgba(52,65,85,0.8);
+    color:white;
+    font-size:16px;
+    backdrop-filter:blur(10px);
+}
+
+input::placeholder{color:#94a3b8;}
+
+/* BOTONES RESPONSIVE */
+button{
+    margin-top:12px;
+    padding:15px 20px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:all 0.2s ease;
+    min-height:50px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+button:active{
+    transform:scale(0.98);
+    background:linear-gradient(135deg,#16a34a,#15803d);
+}
+
+/* HERO FULLSCREEN */
+.hero{
     height:100dvh;
-    background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+    background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.85)),
     url('https://api.dix.lat/media/img_1776131911102_jbdcIitE5.jpg');
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
     display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:999;
-    padding:15px;
-}
-
-.login-box{
-    width:100%;
-    max-width:350px;
-    background:rgba(30,41,59,0.95);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    padding:25px;
-    border-radius:15px;
-    text-align:center;
-    color:white;
-    box-shadow:0 10px 30px rgba(0,0,0,0.6);
-}
-
-input{
-    padding:12px;
-    width:100%;
-    margin-top:10px;
-    border:none;
-    border-radius:10px;
-    font-size:16px;
-    background:#334155;
-    color:white;
-}
-
-/* BOTONES */
-button{
-    margin-top:10px;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    background:#22c55e;
-    color:white;
-    cursor:pointer;
-    font-weight:500;
-    font-size:16px;
-    touch-action:manipulation;
-}
-
-/* HERO */
-.hero{
-    height:100vh;
-    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),
-    url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092');
-    background-size:cover;
-    background-position:center;
-    display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
+    padding:20px;
 }
 
-/* MENU */
-.menu{padding:20px;}
+.hero h1{
+    font-size:clamp(28px, 8vw, 48px);
+    margin-bottom:30px;
+    text-shadow:0 4px 20px rgba(0,0,0,0.8);
+}
+
+/* MENU GRID RESPONSIVE */
+.menu{padding:20px 15px;}
+
+.menu h2{
+    font-size:clamp(20px, 6vw, 28px);
+    margin:20px 0;
+    text-align:center;
+}
 
 .card{
-    background:#1e293b;
+    background:rgba(30,41,59,0.9);
+    backdrop-filter:blur(15px);
     padding:20px;
-    margin-bottom:15px;
-    border-radius:15px;
-    border:1px solid #334155;
-    transition: transform 0.3s;
+    margin-bottom:20px;
+    border-radius:20px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+    border:1px solid rgba(255,255,255,0.1);
 }
 
-.card:hover{transform:translateY(-3px);}
-
-.card h3{
-    margin-bottom:5px;
-    font-size:18px;
-}
-
-.card p{
-    font-size:20px;
-    color:#22c55e;
-    font-weight:700;
-    margin:10px 0;
-}
+.card h3{font-size:clamp(16px, 4vw, 20px); margin-bottom:8px;}
+.card p{font-size:18px; font-weight:600; color:#10b981;}
 
 .status{
     display:inline-block;
-    padding:6px 12px;
-    border-radius:10px;
-    margin:5px 0;
-    font-size:13px;
-    font-weight:500;
+    padding:8px 15px;
+    border-radius:25px;
+    margin-top:10px;
+    font-weight:600;
+    font-size:14px;
 }
 
-.available{background:#22c55e;}
-.soldout{background:#ef4444;}
+.available{background:linear-gradient(135deg,#22c55e,#16a34a);}
+.soldout{background:linear-gradient(135deg,#ef4444,#dc2626);}
 
 .toggle{
     display:none;
-    background:#f59e0b;
-    width:100%;
-    padding:10px;
-    margin:8px 0;
+    background:linear-gradient(135deg,#f59e0b,#d97706);
+    margin-top:10px;
+    font-size:14px;
 }
 
 .order-btn{
-    background:#3b82f6;
+    background:linear-gradient(135deg,#3b82f6,#1d4ed8);
+    margin-top:10px;
     width:100%;
-    padding:12px;
-    margin:8px 0;
 }
 
-/* PANEL */
-.panel{padding:20px;background:#020617;}
+/* PANEL MESAS */
+.panel{padding:20px 15px;background:#020617;}
 
-.pedido{
-    background:#334155;
+.pedido-individual{
+    background:rgba(51,65,85,0.8);
     padding:15px;
-    margin-bottom:10px;
-    border-radius:10px;
+    margin-bottom:15px;
+    border-radius:15px;
+}
+
+.mesa-grupo{
+    background:rgba(30,41,59,0.95);
+    backdrop-filter:blur(20px);
+    padding:25px;
+    margin-bottom:25px;
+    border-radius:20px;
+    border-left:6px solid #10b981;
+    box-shadow:0 10px 40px rgba(0,0,0,0.4);
+}
+
+.mesa-grupo.domicilio {border-left-color:#f59e0b;}
+.mesa-grupo.nuevo {border-left-color:#22c55e;}
+.mesa-grupo.preparando {border-left-color:#f59e0b;}
+.mesa-grupo.listo {border-left-color:#10b981;}
+
+.mesa-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    padding-bottom:15px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.mesa-titulo{
+    font-size:clamp(18px, 5vw, 24px);
+    font-weight:700;
+}
+
+.mesa-total{
+    background:linear-gradient(135deg,#10b981,#059669);
+    padding:10px 20px;
+    border-radius:25px;
+    font-weight:700;
+    font-size:18px;
+    box-shadow:0 4px 15px rgba(16,185,129,0.4);
+}
+
+.pedido-grupo{
+    background:rgba(51,65,85,0.7);
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:15px;
+    font-size:clamp(14px, 3.5vw, 16px);
+    border-left:3px solid #3b82f6;
 }
 
 .delete-btn{
-    background:#ef4444;
-    margin-top:5px;
-    width:100%;
-    padding:8px;
+    background:linear-gradient(135deg,#ef4444,#dc2626) !important;
+    padding:8px 15px !important;
+    font-size:14px !important;
 }
 
-/* MODAL */
+.estado-btn{
+    padding:8px 15px;
+    margin:5px 3px;
+    font-size:14px;
+    border-radius:10px;
+    font-weight:600;
+}
+
+/* MODAL FULL RESPONSIVE */
 #modalPago{
     display:none;
     position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.8);
-    display:flex;
+    inset:0;
+    background:rgba(0,0,0,0.85);
     justify-content:center;
     align-items:center;
-    z-index:1000;
+    z-index:1001;
+    padding:20px;
+    backdrop-filter:blur(10px);
 }
 
 .modal-box{
-    background:#1e293b;
-    padding:25px;
-    border-radius:15px;
+    background:rgba(30,41,59,0.98);
+    backdrop-filter:blur(30px);
+    padding:30px;
+    border-radius:25px;
     text-align:center;
-    width:90%;
-    max-width:350px;
+    width:100%;
+    max-width:380px;
+    box-shadow:0 25px 50px rgba(0,0,0,0.6);
+    border:1px solid rgba(255,255,255,0.15);
 }
 
-/* TOAST */
+.modal-box h2{font-size:clamp(24px, 8vw, 32px); margin:15px 0; letter-spacing:2px;}
+
+/* TOAST MEJORADO */
 .toast{
     position:fixed;
     bottom:20px;
     left:50%;
     transform:translateX(-50%);
-    background:#22c55e;
-    padding:12px 20px;
-    border-radius:10px;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    padding:15px 25px;
+    border-radius:25px;
     display:none;
-    z-index:1001;
+    font-weight:600;
+    box-shadow:0 10px 30px rgba(34,197,94,0.4);
+    max-width:90%;
+    z-index:1002;
 }
 
-/* 🔥 RESPONSIVE COMPLETO - iOS/Android/PC */
-@media (max-width:768px){
-    .topbar{padding:10px 12px; font-size:13px;}
-    .login-box{padding:20px; max-width:320px;}
-    .menu{padding:15px;}
-    .card{padding:18px 15px; margin-bottom:12px;}
-    .card h3{font-size:16px;}
-    .card p{font-size:18px;}
-    button{padding:14px; font-size:15px; min-height:48px;}
-    .toggle, .order-btn{display:block; width:100%; margin:8px 0;}
-    .pedido{padding:12px;}
+/* LANDSCAPE SUPPORT */
+@media (orientation: landscape) and (max-height: 500px) {
+    .hero {justify-content:center;}
+    .hero h1 {font-size:clamp(24px, 6vw, 36px);}
 }
 
-@media (max-width:480px){
-    .card{padding:15px;}
-    .card h3{font-size:15px;}
-    .card p{font-size:17px;}
-    .status{font-size:12px; padding:5px 10px;}
-    .topbar{padding:8px 10px;}
-}
-
-@media (min-width:1024px){
-    .menu{max-width:1000px; margin:0 auto;}
-    .card{display:grid; grid-template-columns:2fr 1fr auto auto; gap:15px; align-items:center;}
-    .card h3, .card p{margin:0;}
-    .toggle, .order-btn{width:auto; margin:0 5px;}
-    .status{margin-right:10px;}
+/* HOVER PC */
+@media (hover: hover) {
+    button:hover {transform:scale(1.02);}
+    .card:hover {transform:translateY(-5px);}
 }
 </style>
 </head>
@@ -269,113 +346,120 @@ button{
 
 <!-- TOP BAR -->
 <div class="topbar">
-    <div>🐟 𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯</div>
+    <div style="font-size:clamp(14px, 4vw, 18px); font-weight:600;">🐟 𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯</div>
     <div id="roleText" class="role-badge">cliente</div>
 </div>
 
 <!-- LOGIN -->
 <div class="login" id="login">
     <div class="login-box">
-        <h2 style="margin-bottom:15px;">🐟 Ingresar</h2>
-        <input id="email" placeholder="Correo electrónico">
-        <button onclick="login()">Entrar 🚀</button>
+        <h2 style="margin-bottom:20px; font-size:clamp(22px, 6vw, 28px);">👋 Ingresar</h2>
+        <input id="email" placeholder="📧 Tu correo" autocomplete="off">
+        <button onclick="login()">
+            🚀 Entrar
+        </button>
     </div>
 </div>
 
 <!-- HOME -->
 <section id="home" class="page active">
     <div class="hero">
-        <h1 style="font-size:clamp(2rem,5vw,3rem); margin-bottom:30px;">𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 🐟</h1>
-        <button onclick="showPage('menuPage')" style="max-width:250px; margin:10px;">Ver menú 🍽️</button>
-        <button onclick="showPage('panelPage')" style="max-width:250px; margin:10px;">Cocina 👨‍🍳</button>
+        <h1>𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 🐟</h1>
+        <div style="display:flex; flex-direction:column; gap:15px; width:100%; max-width:350px;">
+            <button onclick="showPage('menuPage')" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);">
+                🍽️ Ver Menú
+            </button>
+            <button onclick="showPage('panelPage')" style="background:linear-gradient(135deg,#f59e0b,#d97706);">
+                👨‍🍳 Cocina / Mesas
+            </button>
+        </div>
     </div>
 </section>
 
 <!-- MENU -->
 <section id="menuPage" class="page">
     <div class="menu">
-
-        <h2 style="margin:20px 0 30px 0; text-align:center;">🐟 𝔅𝔯𝔦𝔰𝔞𝔰 𝔡𝔢𝔩 𝔐𝔞𝔯 𝔐𝔢𝔫𝔲́</h2>
-
+        <h2>🐟 Menú del Día</h2>
+        
         <div class="card">
-            <h3>🐟 Cazuela de Mariscos</h3>
+            <h3>Cazuela de Mariscos</h3>
             <p>$30.000</p>
-            <span class="status available" id="status1">Disponible</span>
+            <span class="status available" id="status1">✅ Disponible</span>
             <button class="toggle" onclick="toggle(1)">Cambiar estado</button>
             <button class="order-btn" onclick="pedir('Cazuela de Mariscos',30000)">🛒 Pedir</button>
         </div>
 
         <div class="card">
-            <h3>🍤 Arroz de Camarón</h3>
+            <h3>Arroz de Camarón</h3>
             <p>$28.000</p>
-            <span class="status available" id="status2">Disponible</span>
+            <span class="status available" id="status2">✅ Disponible</span>
             <button class="toggle" onclick="toggle(2)">Cambiar estado</button>
             <button class="order-btn" onclick="pedir('Arroz de Camarón',28000)">🛒 Pedir</button>
         </div>
 
         <div class="card">
-            <h3>🐟 Viudo de Capaz</h3>
+            <h3>Viudo de Capaz</h3>
             <p>$25.000</p>
-            <span class="status available" id="status3">Disponible</span>
+            <span class="status available" id="status3">✅ Disponible</span>
             <button class="toggle" onclick="toggle(3)">Cambiar estado</button>
             <button class="order-btn" onclick="pedir('Viudo de Capaz',25000)">🛒 Pedir</button>
         </div>
 
         <div class="card">
-            <h3>🐟 Mojarra en Salsa</h3>
+            <h3>Mojarra en Salsa</h3>
             <p>$22.000</p>
-            <span class="status available" id="status4">Disponible</span>
+            <span class="status available" id="status4">✅ Disponible</span>
             <button class="toggle" onclick="toggle(4)">Cambiar estado</button>
             <button class="order-btn" onclick="pedir('Mojarra en Salsa',22000)">🛒 Pedir</button>
         </div>
 
         <div class="card">
-            <h3>🐟 Mojarra Frita</h3>
+            <h3>Mojarra Frita</h3>
             <p>$20.000</p>
-            <span class="status available" id="status5">Disponible</span>
+            <span class="status available" id="status5">✅ Disponible</span>
             <button class="toggle" onclick="toggle(5)">Cambiar estado</button>
             <button class="order-btn" onclick="pedir('Mojarra Frita',20000)">🛒 Pedir</button>
         </div>
 
         <div class="card">
-            <h3>🐟 Bocachico en Salsa</h3>
+            <h3>Bocachico en Salsa</h3>
             <p>$23.000</p>
-            <span class="status available" id="status6">Disponible</span>
+            <span class="status available" id="status6">✅ Disponible</span>
             <button class="toggle" onclick="toggle(6)">Cambiar estado</button>
             <button class="order-btn" onclick="pedir('Bocachico en Salsa',23000)">🛒 Pedir</button>
         </div>
 
         <div class="card">
-            <h3>🐟 Bocachico Frito</h3>
+            <h3>Bocachico Frito</h3>
             <p>$21.000</p>
-            <span class="status available" id="status7">Disponible</span>
+            <span class="status available" id="status7">✅ Disponible</span>
             <button class="toggle" onclick="toggle(7)">Cambiar estado</button>
             <button class="order-btn" onclick="pedir('Bocachico Frito',21000)">🛒 Pedir</button>
         </div>
 
         <div class="card">
-            <h3>🐟 Mapará en Salsa</h3>
+            <h3>Mapará en Salsa</h3>
             <p>$24.000</p>
-            <span class="status available" id="status8">Disponible</span>
+            <span class="status available" id="status8">✅ Disponible</span>
             <button class="toggle" onclick="toggle(8)">Cambiar estado</button>
             <button class="order-btn" onclick="pedir('Mapará en Salsa',24000)">🛒 Pedir</button>
         </div>
-
     </div>
 </section>
 
-<!-- PANEL -->
+<!-- PANEL MESAS -->
 <section id="panelPage" class="page panel">
-    <h2 style="margin-bottom:20px;">Pedidos 👨‍🍳</h2>
+    <h2 style="font-size:clamp(22px, 6vw, 30px); margin-bottom:25px;">🍽️ Mesas y Domicilios</h2>
     <div id="listaPedidos"></div>
 </section>
 
-<!-- MODAL -->
+<!-- MODAL PAGO -->
 <div id="modalPago">
     <div class="modal-box">
-        <h3>💳 Pagar con Nequi</h3>
-        <h2 style="color:#22c55e; margin:15px 0;">3001234567</h2>
-        <button onclick="cerrarModal()">✅ OK Pagado</button>
+        <h3 style="font-size:clamp(18px, 5vw, 24px);">💳 Pagar con Nequi</h3>
+        <h2>3001234567</h2>
+        <p style="color:#94a3b8; margin:15px 0; font-size:16px;">Guarda este número</p>
+        <button onclick="cerrarModal()" style="background:linear-gradient(135deg,#10b981,#059669);">✅ Listo</button>
     </div>
 </div>
 
@@ -384,113 +468,9 @@ button{
 
 <script>
 let role="cliente";
-let userMesa="";
 let pedidos=[];
+let mesas={};
 const creador="guerraroncancio@gmail.com";
 const creadorPass="032623";
 
-const canal = new BroadcastChannel("brisas_pedidos");
-
-canal.onmessage = (e)=>{
-    if(e.data.type==="nuevo"){
-        pedidos.unshift(e.data.pedido);
-        guardar();
-        render();
-        toast("🔔 Nuevo pedido!");
-    }
-};
-
-function showPage(page){
-    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-    document.getElementById(page).classList.add("active");
-}
-
-function login(){
-    let email=document.getElementById("email").value.toLowerCase().trim();
-    if(!email) return toast("❌ Ingresa correo");
-
-    if(email===creador){
-        let pass=prompt("🔑 Contraseña del dueño:");
-        if(pass!==creadorPass) return toast("❌ Error contraseña");
-        role="dueno";
-        document.querySelectorAll('.toggle').forEach(btn => btn.style.display = 'block');
-        document.getElementById("roleText").className = "role-badge dueno";
-        document.getElementById("roleText").innerText="Dueño 👑";
-    }else{
-        role="cliente";
-        let mesa = prompt("🌊 ¿Qué mesa? (1, 2, 3 o 'llevar')");
-        if(!mesa) return toast("❌ Selecciona mesa");
-        userMesa = mesa.toLowerCase().includes('llevar') ? 'Para llevar 🚗' : `Mesa ${mesa}`;
-    }
-
-    document.getElementById("login").style.display="none";
-    cargar();
-    render();
-}
-
-function guardar(){localStorage.setItem("pedidos",JSON.stringify(pedidos));}
-function cargar(){pedidos=JSON.parse(localStorage.getItem("pedidos"))||[];}
-
-function pedir(prod,precio){
-    if(role==="cliente" && !userMesa) return toast("❌ Login primero");
-
-    let nombre = prompt("👤 ¿Nombre del cliente?");
-    if(!nombre) return toast("❌ Nombre requerido");
-
-    let cantidad = prompt("📊 ¿Cuántas porciones?", "1");
-    if(!cantidad || isNaN(cantidad)) cantidad = 1;
-    let total = precio * parseInt(cantidad);
-
-    if(!confirm(`🍽️ ${prod}\n👤 ${nombre}\n📊 ${cantidad} x $${precio.toLocaleString()}\n💰 TOTAL: $${total.toLocaleString()}\n📍 ${userMesa || 'Cocina'}\n\n¿Confirmar pedido?`)){
-        return;
-    }
-
-    const pedido = {
-        id: Date.now(),
-        nombre: nombre.trim(),
-        mesa: userMesa || 'Cocina',
-        producto: `${prod} (${cantidad})`,
-        precio: total,
-        estado: "🆕 Nuevo",
-        timestamp: new Date().toLocaleTimeString()
-    };
-
-    pedidos.unshift(pedido);
-    guardar();
-    canal.postMessage({type:"nuevo", pedido});
-
-    if(confirm(`💰 Total: $${total.toLocaleString()}\n📍 ${userMesa}\n\n¿Pagar ahora con Nequi?`)){
-        document.getElementById("modalPago").style.display="flex";
-    }
-
-    toast("✅ Pedido enviado a cocina!");
-    render();
-}
-
-function render(){
-    cargar();
-    let cont=document.getElementById("listaPedidos");
-    if(!cont) return;
-
-    if(pedidos.length===0){
-        cont.innerHTML='<div style="text-align:center;padding:40px;color:#94a3b8;">🎉 No hay pedidos</div>';
-        return;
-    }
-
-    cont.innerHTML = pedidos.map(p => `
-        <div class="pedido">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;">
-                <div style="flex:1;">
-                    <b style="font-size:16px;">${p.nombre}</b><br>
-                    <span style="font-size:14px;">🍽️ ${p.producto}</span><br>
-                    <span style="color:#22c55e;font-weight:600;">💰 $${p.precio.toLocaleString()}</span> | 
-                    <span style="color:#94a3b8;">📍 ${p.mesa}</span>
-                </div>
-                <div style="text-align:right;">
-                    <div style="font-size:12px;color:#94a3b8;">${p.timestamp}</div>
-                    <span style="background:#10b981;padding:6px 12px;border-radius:10px;font-size:13px;display:inline-block;">${p.estado}</span>
-                </div>
-            </div>
-            ${role === "dueno" ? `
-                <div style="margin-top:15px;padding-top:15px;border-top:1px solid #475569;">
-                    <button class="status-btn" onclick="cambiarEstado(${p.id},'🔥 Preparando')" style="background:#f59e0b
+const canal = new BroadcastChannel

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brisas del Mar</title>
+<link rel="icon" href="data:,">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#f7f3eb;color:#241c16}
@@ -49,7 +50,7 @@ label{font-weight:bold;display:block}
 .order-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .oi{margin:8px 0;padding:8px;background:#f7f3eb;border-radius:8px}
 .oi ul{list-style:none;padding:0;margin:0}
-.oi li{padding:3px 0;display:flex;justify-content:space-between}
+.oi li{padding:3px 0;display:flex;justify-content:space-between;gap:10px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:15px;margin-top:15px}
 .stat{background:white;padding:20px;border-radius:12px;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.08)}
 .stat h3{color:#e8491d;font-size:28px;margin-bottom:4px}
@@ -77,201 +78,50 @@ label{font-weight:bold;display:block}
 </head>
 <body>
 <script>
-// ╔══════════════════════════════════════════════════════════════╗
-// ║         ZONA DE EDICIÓN — CAMBIA LO QUE NECESITES           ║
-// ╚══════════════════════════════════════════════════════════════╝
-
-// ── Nombre del restaurante ────────────────────────────────────
 const NOMBRE = "𝓑𝓻𝓲𝓼𝓪𝓼 𝓭𝓮𝓵 𝓜𝓪𝓻";
 const SLOGAN = "𝓢𝓪𝓫𝓸𝓻 𝓭𝓮 𝓻í𝓸, 𝓽𝓻𝓪𝓭𝓲𝓬𝓲ó𝓷 𝓭𝓮 𝓯𝓪𝓶𝓲𝓵𝓲𝓪";
-
-// ── Foto de portada ───────────────────────────────────────────
-// Pon aquí la URL de tu imagen o una ruta local como "foto.jpg"
-const FOTO_PORTADA = "url('https://api.dix.lat/media/img_1776131911102_jbdcIitE5.jpg')";
-
-// ── Número de Nequi ───────────────────────────────────────────
+const FOTO_PORTADA = "url('brisas-fondo.jpeg')";
 const NEQUI = "300 123 4567";
-
-// ── Credenciales del personal ─────────────────────────────────
-const COCINERO_EMAIL = "chambofabian58@gmail.com";
-const DUENO_EMAIL    = "guerraroncancio@gmail.com";
-const DUENO_PASS     = "032623";
-
-// ── Menú del restaurante ──────────────────────────────────────
-// Copia, pega o edita platos. Campos: name, description, price, category, available
-// available: true = disponible | false = agotado
+const COCINERO_EMAIL = "cocina@brisasdelmar.com";
+const DUENO_EMAIL = "Ortizjorgerafael19@gmail.com";
+const DUENO_PASS = "032623";
+const CREADOR_EMAIL = "creador@brisasdelmar.com";
+const CREADOR_PASS = "2026";
 const MENU = [
-
-  // ── 🍽️ Platos principales ──
-  {
-    name: "Cazuela de mariscos",
-    description: "Con los 7 frutos del mar",
-    price: 40000,
-    category: "Platos principales",
-    available: true
-  },
-  {
-    name: "Viudo de capaz",
-    description: "Plato tradicional del río",
-    price: 30000,
-    category: "Platos principales",
-    available: true
-  },
-  {
-    name: "Bocachico en salsa de coco",
-    description: "Con arroz y patacón",
-    price: 25000,
-    category: "Platos principales",
-    available: true
-  },
-
-  // ── 🍛 Arroces ──
-  {
-    name: "Arroz de camarones",
-    description: "Arroz con camarones frescos",
-    price: 36000,
-    category: "Arroces",
-    available: true
-  },
-  {
-    name: "Arroz marinero",
-    description: "Mixto de mariscos",
-    price: 37000,
-    category: "Arroces",
-    available: true
-  },
-  {
-    name: "Arroz de lisa",
-    description: "Tradicional del caribe",
-    price: 25000,
-    category: "Arroces",
-    available: true
-  },
-
-  // ── 🐟 Pescados ──
-  {
-    name: "Salmón en salsa de mariscos",
-    description: "Salmón fresco con salsa especial",
-    price: 37000,
-    category: "Pescados",
-    available: true
-  },
-  {
-    name: "Tilapia encocada",
-    description: "Tilapia encocada",
-    price: 35000,
-    category: "Pescados",
-    available: true
-  },
-  {
-    name: "Trucha",
-    description: "bañada en frutos del mar",
-    price: 35000,
-    category: "Pescados",
-    available: true
-  },
-  {
-    name: "Trucha arcoíris",
-    description: "truchas de arcoíris",
-    price: 30000,
-    category: "Pescados",
-    available: true
-  },
-  {
-    name: "Mojarra dorada",
-    description: "Frita y crujiente",
-    price: 35000,
-    category: "Pescados",
-    available: true
-  },
-  {
-    name: "Mojarra guisada",
-    description: "En salsa criolla",
-    price: 30000,
-    category: "Pescados",
-    available: true
-  },
-  {
-    name: "Pescado salado",
-    description: "Pescado salado",
-    price: 25000,
-    category: "Pescados",
-    available: true
-  },
-  {
-    name: "Picuda",
-    description: "Pescado fresco",
-    price: 30000,
-    category: "Pescados",
-    available: true
-  },
-  {
-    name: "Cachama",
-    description: "cachama",
-    price: 25000,
-    category: "Pescados",
-    available: true
-  },
-  {
-    name: "Mapará",
-    description: "Mapará",
-    price: 30000,
-    category: "Pescados",
-    available: true
-  },
-  {
-    name: "Róbalo a la barranquilla",
-    description: "Estilo caribeño",
-    price: 60000,
-    category: "Pescados",
-    available: true
-  },
-
-  // ── 🍤 Mariscos ──
-  {
-    name: "Camarones al ajillo",
-    description: "Camarones al ajillo",
-    price: 25000,
-    category: "Mariscos",
-    available: true
-  },
-  {
-    name: "Langostinos apanados",
-    description: "Crujientes",
-    price: 30000,
-    category: "Mariscos",
-    available: true
-  },
-  {
-    name: "Ceviche costeño",
-    description: "Ceviche costeño",
-    price: 30000,
-    category: "Mariscos",
-    available: true
-  },
-
+  {name:"Cazuela de mariscos",description:"Con los 7 frutos del mar",price:40000,category:"Platos principales",available:true},
+  {name:"Viudo de capaz",description:"Plato tradicional del río",price:30000,category:"Platos principales",available:true},
+  {name:"Bocachico en salsa de coco",description:"Con arroz y patacón",price:25000,category:"Platos principales",available:true},
+  {name:"Arroz de camarones",description:"Arroz con camarones frescos",price:36000,category:"Arroces",available:true},
+  {name:"Arroz marinero",description:"Mixto de mariscos",price:37000,category:"Arroces",available:true},
+  {name:"Arroz de lisa",description:"Tradicional del caribe",price:25000,category:"Arroces",available:true},
+  {name:"Salmón en salsa de mariscos",description:"Salmón fresco con salsa especial",price:37000,category:"Pescados",available:true},
+  {name:"Tilapia encocada",description:"Tilapia encocada",price:35000,category:"Pescados",available:true},
+  {name:"Trucha",description:"Bañada en frutos del mar",price:35000,category:"Pescados",available:true},
+  {name:"Trucha arcoíris",description:"Trucha arcoíris",price:30000,category:"Pescados",available:true},
+  {name:"Mojarra dorada",description:"Frita y crujiente",price:35000,category:"Pescados",available:true},
+  {name:"Mojarra guisada",description:"En salsa criolla",price:30000,category:"Pescados",available:true},
+  {name:"Pescado salado",description:"Pescado salado",price:25000,category:"Pescados",available:true},
+  {name:"Picuda",description:"Pescado fresco",price:30000,category:"Pescados",available:true},
+  {name:"Cachama",description:"Cachama",price:25000,category:"Pescados",available:true},
+  {name:"Mapará",description:"Mapará",price:30000,category:"Pescados",available:true},
+  {name:"Róbalo a la barranquilla",description:"Estilo caribeño",price:60000,category:"Pescados",available:true},
+  {name:"Camarones al ajillo",description:"Camarones al ajillo",price:25000,category:"Mariscos",available:true},
+  {name:"Langostinos apanados",description:"Crujientes",price:30000,category:"Mariscos",available:true},
+  {name:"Ceviche costeño",description:"Ceviche costeño",price:30000,category:"Mariscos",available:true}
 ];
-
-// ╔══════════════════════════════════════════════════════════════╗
-// ║              FIN DE ZONA DE EDICIÓN                         ║
-// ╚══════════════════════════════════════════════════════════════╝
 </script>
-
 <header>
   <h1 id="hNombre"></h1>
   <p id="hSlogan"></p>
 </header>
-
 <nav>
   <button onclick="goTo('menu')">Menú</button>
-  <button class="sec" onclick="goTo('login')">Entrar cocina/dueño</button>
+  <button class="sec" onclick="goTo('login')">Entrar cocina/dueño/creador</button>
   <button class="sec" id="btnCocina" style="display:none" onclick="goTo('cocina')">Cocina</button>
-  <button class="sec" id="btnDueno"  style="display:none" onclick="goTo('dueno')">Dueño</button>
+  <button class="sec" id="btnDueno" style="display:none" onclick="goTo('dueno')">Dueño</button>
+  <button class="sec" id="btnCreador" style="display:none" onclick="goTo('creador')">Creador</button>
 </nav>
-
 <div class="container">
-
-  <!-- MENÚ -->
   <section id="pg-menu" class="page active">
     <div class="cover">
       <div class="cover-content">
@@ -282,18 +132,19 @@ const MENU = [
     </div>
     <div class="hero">
       <div class="top-row">
-        <div><h2>Nuestro Menú</h2><p>Lo mejor del río, fresco y con sazón de familia.</p></div>
+        <div>
+          <h2>Nuestro Menú</h2>
+          <p>Lo mejor del río, fresco y con sazón de familia.</p>
+        </div>
       </div>
     </div>
     <div id="menu-list"></div>
   </section>
-
-  <!-- LOGIN -->
   <section id="pg-login" class="page">
     <div class="cover">
       <div class="cover-content">
         <h2>Ingreso del personal</h2>
-        <p>Cocina y dueño del restaurante.</p>
+        <p>Cocina, dueño y creador de la página web.</p>
       </div>
     </div>
     <div class="form-box">
@@ -302,29 +153,31 @@ const MENU = [
       <label>Correo</label>
       <input id="lEmail" type="email" placeholder="correo@ejemplo.com">
       <div id="passBox" style="display:none">
-        <label>Contraseña dueño</label>
+        <label>Contraseña</label>
         <input id="lPass" type="password" placeholder="Contraseña">
       </div>
       <button onclick="doLogin()">Entrar</button>
     </div>
   </section>
-
-  <!-- COCINA -->
   <section id="pg-cocina" class="page">
     <div class="hero">
       <div class="top-row">
-        <div><h2>Panel de Cocina</h2><p>Pedidos entrantes.</p></div>
+        <div>
+          <h2>Panel de Cocina</h2>
+          <p>Pedidos entrantes.</p>
+        </div>
         <button onclick="renderOrders()">Actualizar</button>
       </div>
     </div>
     <div id="orders-list"></div>
   </section>
-
-  <!-- DUEÑO -->
   <section id="pg-dueno" class="page">
     <div class="hero">
       <div class="top-row">
-        <div><h2>Panel del Dueño</h2><p>Resumen de ventas.</p></div>
+        <div>
+          <h2>Panel del Dueño</h2>
+          <p>Resumen de ventas.</p>
+        </div>
         <button onclick="renderSummary()">Actualizar</button>
       </div>
     </div>
@@ -332,10 +185,27 @@ const MENU = [
     <h2 style="margin-top:30px;color:#e8491d;border-bottom:1px solid #e7d8c9;padding-bottom:8px">Todos los pedidos</h2>
     <div id="all-orders"></div>
   </section>
-
+  <section id="pg-creador" class="page">
+    <div class="hero">
+      <div class="top-row">
+        <div>
+          <h2>Panel del Creador</h2>
+          <p>Control general de la página web.</p>
+        </div>
+        <button onclick="renderCreator()">Actualizar</button>
+      </div>
+    </div>
+    <div id="creator-box" class="stats"></div>
+    <div class="hero" style="margin-top:20px">
+      <h2>Datos del sistema</h2>
+      <p><strong>Restaurante:</strong> <span id="cr-name"></span></p>
+      <p><strong>Correo cocina:</strong> <span id="cr-cocina"></span></p>
+      <p><strong>Correo dueño:</strong> <span id="cr-dueno"></span></p>
+      <p><strong>Correo creador:</strong> <span id="cr-creador"></span></p>
+      <p class="sub" style="margin-top:12px">Este rol puede entrar al panel de cocina, al panel del dueño y revisar la información general de la página.</p>
+    </div>
+  </section>
 </div>
-
-<!-- MODAL CARRITO -->
 <div id="mCart" class="modal">
   <div class="mbox">
     <h2>Tu carrito</h2>
@@ -346,8 +216,6 @@ const MENU = [
     <button class="out" style="margin-top:8px" onclick="cls('mCart')">Cerrar</button>
   </div>
 </div>
-
-<!-- MODAL CHECKOUT -->
 <div id="mCo" class="modal">
   <div class="mbox">
     <h2>Confirmar pedido</h2>
@@ -385,339 +253,467 @@ const MENU = [
     <button class="out" style="margin-top:8px" onclick="cls('mCo')">Cancelar</button>
   </div>
 </div>
-
-<!-- MODAL CONFIRMACIÓN -->
 <div id="mOk" class="modal">
   <div class="mbox" style="text-align:center;padding:35px 20px">
-    <div style="font-size:60px;margin-bottom:15px">✅</div>
+    <div style="font-size:60px;margin-bottom:15px">✓</div>
     <h2 style="margin-bottom:10px">Pedido enviado</h2>
     <p style="color:#555;margin-bottom:20px">Tu pedido llegó a cocina. ¡Pronto estará listo!</p>
     <p id="ok-info" style="background:#f7f3eb;padding:12px;border-radius:10px;margin-bottom:20px;font-size:14px"></p>
     <button onclick="cls('mOk')">Listo</button>
   </div>
 </div>
-
-<!-- BOTÓN CARRITO -->
 <button class="cart-fab" id="cartFab" onclick="opn('mCart')">
-  🛒 Carrito
+  Carrito
   <span class="cc" id="cartCount">0</span>
   <span id="cartFabTotal"></span>
 </button>
-
 <div class="tw" id="toasts"></div>
-
 <script>
-// ═══════════════════════════════════════════════
-//  ESTADO INTERNO
-// ═══════════════════════════════════════════════
-let rol      = "cliente";
-let usuario  = "cliente";
-let carrito  = [];
-let pedidos  = [];
-let nextId   = 1;
-const menu   = MENU.map((m,i) => ({...m, id: i+1}));
-
-// ═══════════════════════════════════════════════
-//  INICIALIZACIÓN
-// ═══════════════════════════════════════════════
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("hNombre").innerText  = NOMBRE;
-  document.getElementById("hSlogan").innerText  = SLOGAN;
-  document.getElementById("cNombre").innerText  = NOMBRE;
-  document.getElementById("nqNum").innerText    = NEQUI;
-  document.querySelector(".cover").style.setProperty("--cover-img", FOTO_PORTADA);
+let rol = "cliente";
+let usuario = "cliente";
+let carrito = [];
+let pedidos = [];
+let nextId = 1;
+const menu = MENU.map((m,i) => ({...m, id: i + 1}));
+document.addEventListener("DOMContentLoaded", function(){
+  document.getElementById("hNombre").innerText = NOMBRE;
+  document.getElementById("hSlogan").innerText = SLOGAN;
+  document.getElementById("cNombre").innerText = NOMBRE;
+  document.getElementById("nqNum").innerText = NEQUI;
+  document.documentElement.style.setProperty("--cover-img", FOTO_PORTADA);
   renderMenu();
 });
-
-// ═══════════════════════════════════════════════
-//  UTILIDADES
-// ═══════════════════════════════════════════════
-const $ = id => document.getElementById(id);
-function money(v){ return "$ " + Number(v).toLocaleString("es-CO"); }
-function opn(id){ $(id).classList.add("open"); }
-function cls(id){ $(id).classList.remove("open"); }
+function $(id){
+  return document.getElementById(id);
+}
+function money(v){
+  return "$ " + Number(v).toLocaleString("es-CO");
+}
+function opn(id){
+  $(id).classList.add("open");
+  if(id === "mCart"){
+    renderCart();
+  }
+}
+function cls(id){
+  $(id).classList.remove("open");
+}
 function toast(msg){
   const d = document.createElement("div");
-  d.className = "toast"; d.innerText = msg;
+  d.className = "toast";
+  d.innerText = msg;
   $("toasts").appendChild(d);
-  setTimeout(() => d.remove(), 2800);
+  setTimeout(function(){
+    d.remove();
+  }, 2800);
 }
-
-// ═══════════════════════════════════════════════
-//  NAVEGACIÓN
-// ═══════════════════════════════════════════════
-function goTo(pg) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  $("pg-"+pg).classList.add("active");
-  if (pg === "cocina") renderOrders();
-  if (pg === "dueno")  renderSummary();
+function goTo(pg){
+  document.querySelectorAll(".page").forEach(function(p){
+    p.classList.remove("active");
+  });
+  $("pg-" + pg).classList.add("active");
+  if(pg === "cocina") renderOrders();
+  if(pg === "dueno") renderSummary();
+  if(pg === "creador") renderCreator();
 }
-
-function updateNav() {
-  const staff = ["cocinero","dueno"].includes(rol);
-  const owner = rol === "dueno";
+function updateNav(){
+  const staff = ["cocinero","dueno","creador"].includes(rol);
+  const owner = ["dueno","creador"].includes(rol);
+  const creator = rol === "creador";
   $("btnCocina").style.display = staff ? "inline-block" : "none";
-  $("btnDueno").style.display  = owner ? "inline-block" : "none";
+  $("btnDueno").style.display = owner ? "inline-block" : "none";
+  $("btnCreador").style.display = creator ? "inline-block" : "none";
 }
-
-// ═══════════════════════════════════════════════
-//  LOGIN
-// ═══════════════════════════════════════════════
-function doLogin() {
+function doLogin(){
   const email = $("lEmail").value.trim().toLowerCase();
-  const pass  = $("lPass").value;
-  if (!email) { toast("Ingresa tu correo"); return; }
-
-  if (email === DUENO_EMAIL) {
-    if (!pass) { $("passBox").style.display = "block"; toast("Ingresa la contraseña"); return; }
-    if (pass !== DUENO_PASS) { toast("Contraseña incorrecta"); return; }
-    rol = "dueno"; usuario = "Dueño";
-  } else if (email === COCINERO_EMAIL) {
-    rol = "cocinero"; usuario = "Cocinero";
-  } else {
-    toast("Correo no autorizado"); return;
+  const pass = $("lPass").value;
+  if(!email){
+    toast("Ingresa tu correo");
+    return;
   }
-
+  if(email === CREADOR_EMAIL.toLowerCase()){
+    if(!pass){
+      $("passBox").style.display = "block";
+      toast("Ingresa la contraseña");
+      return;
+    }
+    if(pass !== CREADOR_PASS){
+      toast("Contraseña incorrecta");
+      return;
+    }
+    rol = "creador";
+    usuario = "Creador";
+  } else if(email === DUENO_EMAIL.toLowerCase()){
+    if(!pass){
+      $("passBox").style.display = "block";
+      toast("Ingresa la contraseña");
+      return;
+    }
+    if(pass !== DUENO_PASS){
+      toast("Contraseña incorrecta");
+      return;
+    }
+    rol = "dueno";
+    usuario = "Dueño";
+  } else if(email === COCINERO_EMAIL.toLowerCase()){
+    rol = "cocinero";
+    usuario = "Cocinero";
+  } else {
+    toast("Correo no autorizado");
+    return;
+  }
   updateNav();
   toast("Entraste como " + usuario);
-  if (rol === "cocinero") goTo("cocina");
-  else                    goTo("dueno");
+  if(rol === "cocinero"){
+    goTo("cocina");
+  } else if(rol === "creador"){
+    goTo("creador");
+  } else {
+    goTo("dueno");
+  }
 }
-
-// ═══════════════════════════════════════════════
-//  MENÚ
-// ═══════════════════════════════════════════════
-function renderMenu() {
+function renderMenu(){
   const c = $("menu-list");
   const grp = {};
-  menu.forEach(i => { (grp[i.category] = grp[i.category] || []).push(i); });
-
-  const isStaff = ["cocinero","dueno"].includes(rol);
+  menu.forEach(function(i){
+    if(!grp[i.category]){
+      grp[i.category] = [];
+    }
+    grp[i.category].push(i);
+  });
+  const isStaff = ["cocinero","dueno","creador"].includes(rol);
   let html = "";
-  Object.keys(grp).forEach(cat => {
-    html += `<h2 class="cat-title">${cat}</h2><div class="grid">`;
-    grp[cat].forEach(item => {
-      const inCart = carrito.find(x => x.id === item.id);
-      const lbl    = inCart ? `Agregar (${inCart.qty})` : "Agregar al carrito";
-      html += `
-        <div class="card">
-          <h3>${item.name}</h3>
-          <p class="desc">${item.description}</p>
-          <div class="price">${money(item.price)}</div>
-          <span class="badge ${item.available ? "yes" : "no"}">
-            ${item.available ? "Disponible" : "Agotado"}
-          </span>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-            <button ${!item.available ? "disabled" : ""}
-              onclick="addCart(${item.id})">
-              ${lbl}
-            </button>
-            ${isStaff ? `<button class="sec" onclick="toggleDisp(${item.id})">Cambiar estado</button>` : ""}
-          </div>
-        </div>`;
+  Object.keys(grp).forEach(function(cat){
+    html += '<h2 class="cat-title">' + cat + '</h2><div class="grid">';
+    grp[cat].forEach(function(item){
+      const inCart = carrito.find(function(x){
+        return x.id === item.id;
+      });
+      const lbl = inCart ? "Agregar (" + inCart.qty + ")" : "Agregar al carrito";
+      html += '<div class="card">';
+      html += '<h3>' + item.name + '</h3>';
+      html += '<p class="desc">' + item.description + '</p>';
+      html += '<div class="price">' + money(item.price) + '</div>';
+      html += '<span class="badge ' + (item.available ? "yes" : "no") + '">' + (item.available ? "Disponible" : "Agotado") + '</span>';
+      html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">';
+      html += '<button ' + (!item.available ? "disabled" : "") + ' onclick="addCart(' + item.id + ')">' + lbl + '</button>';
+      if(isStaff){
+        html += '<button class="sec" onclick="toggleDisp(' + item.id + ')">Cambiar estado</button>';
+      }
+      html += '</div>';
+      html += '</div>';
     });
     html += "</div>";
   });
   c.innerHTML = html;
 }
-
-function toggleDisp(id) {
-  const item = menu.find(m => m.id === id);
-  if (item) { item.available = !item.available; renderMenu(); toast("Estado actualizado"); }
+function toggleDisp(id){
+  const item = menu.find(function(m){
+    return m.id === id;
+  });
+  if(item){
+    item.available = !item.available;
+    renderMenu();
+    toast("Estado actualizado");
+  }
 }
-
-// ═══════════════════════════════════════════════
-//  CARRITO
-// ═══════════════════════════════════════════════
-function addCart(id) {
-  const item = menu.find(m => m.id === id);
-  if (!item) return;
-  const ex = carrito.find(i => i.id === id);
-  if (ex) ex.qty++;
-  else carrito.push({ id, name: item.name, price: item.price, qty: 1 });
+function addCart(id){
+  const item = menu.find(function(m){
+    return m.id === id;
+  });
+  if(!item) return;
+  const ex = carrito.find(function(i){
+    return i.id === id;
+  });
+  if(ex){
+    ex.qty++;
+  } else {
+    carrito.push({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      qty: 1
+    });
+  }
   updateFab();
   toast(item.name + " agregado al carrito");
   renderMenu();
 }
-
-function changeQty(id, delta) {
-  const item = carrito.find(i => i.id === id);
-  if (!item) return;
+function changeQty(id, delta){
+  const item = carrito.find(function(i){
+    return i.id === id;
+  });
+  if(!item) return;
   item.qty += delta;
-  if (item.qty <= 0) carrito = carrito.filter(i => i.id !== id);
-  updateFab(); renderCart();
+  if(item.qty <= 0){
+    carrito = carrito.filter(function(i){
+      return i.id !== id;
+    });
+  }
+  updateFab();
+  renderCart();
 }
-
-function removeCart(id) {
-  carrito = carrito.filter(i => i.id !== id);
-  updateFab(); renderCart();
+function removeCart(id){
+  carrito = carrito.filter(function(i){
+    return i.id !== id;
+  });
+  updateFab();
+  renderCart();
 }
-
-function updateFab() {
-  const n = carrito.reduce((s,i) => s+i.qty, 0);
-  const t = carrito.reduce((s,i) => s+i.price*i.qty, 0);
-  $("cartCount").innerText    = n;
+function updateFab(){
+  const n = carrito.reduce(function(s,i){
+    return s + i.qty;
+  }, 0);
+  const t = carrito.reduce(function(s,i){
+    return s + i.price * i.qty;
+  }, 0);
+  $("cartCount").innerText = n;
   $("cartFabTotal").innerText = money(t);
   $("cartFab").classList.toggle("on", n > 0);
 }
-
-function renderCart() {
-  const t = carrito.reduce((s,i) => s+i.price*i.qty, 0);
+function renderCart(){
+  const t = carrito.reduce(function(s,i){
+    return s + i.price * i.qty;
+  }, 0);
   const b = $("cartBody");
-  if (!carrito.length) {
+  if(!carrito.length){
     b.innerHTML = "<p style='text-align:center;padding:30px 0;color:#888'>El carrito está vacío.</p>";
-    $("cartTotal").innerText = ""; return;
+    $("cartTotal").innerText = "";
+    return;
   }
-  b.innerHTML = carrito.map(item => `
-    <div class="ci">
-      <div class="ci-info">
-        <div class="ci-name">${item.name}</div>
-        <div class="ci-price">${money(item.price)} c/u</div>
-      </div>
-      <div class="qc">
-        <button class="qb" onclick="changeQty(${item.id},-1)">−</button>
-        <span style="min-width:20px;text-align:center">${item.qty}</span>
-        <button class="qb" onclick="changeQty(${item.id},1)">+</button>
-        <button class="qb danger" onclick="removeCart(${item.id})" style="font-size:14px;margin-left:4px">✕</button>
-      </div>
-    </div>`).join("");
+  let html = "";
+  carrito.forEach(function(item){
+    html += '<div class="ci">';
+    html += '<div class="ci-info">';
+    html += '<div class="ci-name">' + item.name + '</div>';
+    html += '<div class="ci-price">' + money(item.price) + ' c/u</div>';
+    html += '</div>';
+    html += '<div class="qc">';
+    html += '<button class="qb" onclick="changeQty(' + item.id + ',-1)">−</button>';
+    html += '<span style="min-width:20px;text-align:center">' + item.qty + '</span>';
+    html += '<button class="qb" onclick="changeQty(' + item.id + ',1)">+</button>';
+    html += '<button class="qb danger" onclick="removeCart(' + item.id + ')" style="font-size:14px;margin-left:4px">x</button>';
+    html += '</div>';
+    html += '</div>';
+  });
+  b.innerHTML = html;
   $("cartTotal").innerText = "Total: " + money(t);
 }
-
-// ═══════════════════════════════════════════════
-//  CHECKOUT
-// ═══════════════════════════════════════════════
-function openCheckout() {
-  if (!carrito.length) { toast("El carrito está vacío"); return; }
-  const t = carrito.reduce((s,i) => s+i.price*i.qty, 0);
-  $("co-items").innerHTML = carrito.map(i =>
-    `<li><span>${i.qty}× ${i.name}</span><span>${money(i.price*i.qty)}</span></li>`).join("");
+function openCheckout(){
+  if(!carrito.length){
+    toast("El carrito está vacío");
+    return;
+  }
+  const t = carrito.reduce(function(s,i){
+    return s + i.price * i.qty;
+  }, 0);
+  let itemsHtml = "";
+  carrito.forEach(function(i){
+    itemsHtml += "<li><span>" + i.qty + "x " + i.name + "</span><span>" + money(i.price * i.qty) + "</span></li>";
+  });
+  $("co-items").innerHTML = itemsHtml;
   $("co-total").innerText = "Total: " + money(t);
-  $("co-name").value = ""; $("co-del").value = "mesa";
-  $("co-table").value = ""; $("co-addr").value = ""; $("co-phone").value = "";
+  $("co-name").value = "";
+  $("co-del").value = "mesa";
+  $("co-table").value = "";
+  $("co-addr").value = "";
+  $("co-phone").value = "";
   $("co-pay").value = "Contra entrega";
-  togDel(); togNq();
-  cls("mCart"); opn("mCo");
+  togDel();
+  togNq();
+  cls("mCart");
+  opn("mCo");
 }
-
-function togDel() {
+function togDel(){
   const v = $("co-del").value;
-  $("co-mesa").style.display = v === "mesa"      ? "block" : "none";
-  $("co-dom").style.display  = v === "domicilio" ? "block" : "none";
+  $("co-mesa").style.display = v === "mesa" ? "block" : "none";
+  $("co-dom").style.display = v === "domicilio" ? "block" : "none";
 }
-function togNq() {
+function togNq(){
   $("co-nq").style.display = $("co-pay").value === "Nequi" ? "block" : "none";
 }
-
-function submitOrder() {
-  const name     = $("co-name").value.trim();
+function submitOrder(){
+  const name = $("co-name").value.trim();
   const delivery = $("co-del").value;
-  const table    = $("co-table").value.trim();
-  const addr     = $("co-addr").value.trim();
-  const phone    = $("co-phone").value.trim();
-  const payment  = $("co-pay").value;
-
-  if (!name)                                    { toast("Escribe tu nombre"); return; }
-  if (delivery === "mesa"      && !table)       { toast("Escribe el número de mesa"); return; }
-  if (delivery === "domicilio" && (!addr||!phone)) { toast("Escribe dirección y celular"); return; }
-
-  const total = carrito.reduce((s,i) => s+i.price*i.qty, 0);
+  const table = $("co-table").value.trim();
+  const addr = $("co-addr").value.trim();
+  const phone = $("co-phone").value.trim();
+  const payment = $("co-pay").value;
+  if(!name){
+    toast("Escribe tu nombre");
+    return;
+  }
+  if(delivery === "mesa" && !table){
+    toast("Escribe el número de mesa");
+    return;
+  }
+  if(delivery === "domicilio" && (!addr || !phone)){
+    toast("Escribe dirección y celular");
+    return;
+  }
+  const total = carrito.reduce(function(s,i){
+    return s + i.price * i.qty;
+  }, 0);
   const pedido = {
     id: nextId++,
-    nombre: name, delivery, table, addr, phone, payment,
-    items: [...carrito.map(i => ({...i}))],
-    total, estado: "nuevo", tiempo: null, atendido: null,
-    hora: new Date().toLocaleTimeString("es-CO", {hour:"2-digit", minute:"2-digit"})
+    nombre: name,
+    delivery: delivery,
+    table: table,
+    addr: addr,
+    phone: phone,
+    payment: payment,
+    items: carrito.map(function(i){
+      return {
+        id: i.id,
+        name: i.name,
+        price: i.price,
+        qty: i.qty
+      };
+    }),
+    total: total,
+    estado: "nuevo",
+    tiempo: null,
+    atendido: null,
+    hora: new Date().toLocaleTimeString("es-CO",{hour:"2-digit",minute:"2-digit"})
   };
   pedidos.push(pedido);
-
-  // Info de confirmación
-  let info = `Cliente: ${name}\n`;
-  info += delivery === "mesa" ? `Mesa: ${table}\n` : `Dirección: ${addr} | Cel: ${phone}\n`;
-  info += `Pago: ${payment} | Total: ${money(total)}`;
+  let info = "Cliente: " + name + "\n";
+  info += delivery === "mesa" ? "Mesa: " + table + "\n" : "Dirección: " + addr + " | Cel: " + phone + "\n";
+  info += "Pago: " + payment + " | Total: " + money(total);
   $("ok-info").innerText = info;
-
-  carrito = []; updateFab(); cls("mCo"); opn("mOk");
+  carrito = [];
+  updateFab();
+  cls("mCo");
+  opn("mOk");
   renderMenu();
 }
-
-// ═══════════════════════════════════════════════
-//  PANEL COCINA
-// ═══════════════════════════════════════════════
-function renderOrders() {
+function renderOrders(){
   const c = $("orders-list");
-  const activos = pedidos.filter(p => p.estado !== "cancelado");
-  if (!activos.length) { c.innerHTML = "<p>No hay pedidos todavía.</p>"; return; }
-  c.innerHTML = [...activos].reverse().map(p => `
-    <div class="order">
-      <strong>Pedido #${p.id} — ${p.hora}</strong><br>
-      Cliente: ${p.nombre}<br>
-      <div class="oi">
-        <strong>Platos:</strong>
-        <ul>${p.items.map(i => `<li><span>${i.qty}× ${i.name}</span><span>${money(i.price*i.qty)}</span></li>`).join("")}</ul>
-        <div style="text-align:right;margin-top:4px;font-weight:bold;color:#e8491d">Total: ${money(p.total)}</div>
-      </div>
-      Tipo: ${p.delivery}<br>
-      ${p.delivery === "domicilio"
-        ? `Dirección: ${p.addr||"—"}<br>Celular: ${p.phone||"—"}<br>`
-        : `Mesa: ${p.table||"—"}<br>`}
-      Pago: ${p.payment}<br>
-      Estado: <strong>${p.estado}</strong><br>
-      Tiempo: ${p.tiempo || "Sin asignar"}<br>
-      Atendido por: ${p.atendido || "Sin asignar"}<br>
-      <div class="order-actions">
-        <button onclick="setEstado(${p.id},'en proceso')">En proceso</button>
-        <button onclick="setTiempo(${p.id})">Tiempo</button>
-        <button onclick="setEstado(${p.id},'listo')">Listo</button>
-        <button class="danger" onclick="cancelarPedido(${p.id})">Cancelar</button>
-      </div>
-    </div>`).join("");
+  const activos = pedidos.filter(function(p){
+    return p.estado !== "cancelado";
+  });
+  if(!activos.length){
+    c.innerHTML = "<p>No hay pedidos todavía.</p>";
+    return;
+  }
+  let html = "";
+  activos.slice().reverse().forEach(function(p){
+    let itemsHtml = "";
+    p.items.forEach(function(i){
+      itemsHtml += "<li><span>" + i.qty + "x " + i.name + "</span><span>" + money(i.price * i.qty) + "</span></li>";
+    });
+    html += '<div class="order">';
+    html += '<strong>Pedido #' + p.id + " — " + p.hora + '</strong><br>';
+    html += 'Cliente: ' + p.nombre + '<br>';
+    html += '<div class="oi"><strong>Platos:</strong><ul>' + itemsHtml + '</ul>';
+    html += '<div style="text-align:right;margin-top:4px;font-weight:bold;color:#e8491d">Total: ' + money(p.total) + '</div></div>';
+    html += 'Tipo: ' + p.delivery + '<br>';
+    if(p.delivery === "domicilio"){
+      html += 'Dirección: ' + (p.addr || "—") + '<br>Celular: ' + (p.phone || "—") + '<br>';
+    } else {
+      html += 'Mesa: ' + (p.table || "—") + '<br>';
+    }
+    html += 'Pago: ' + p.payment + '<br>';
+    html += 'Estado: <strong>' + p.estado + '</strong><br>';
+    html += 'Tiempo: ' + (p.tiempo || "Sin asignar") + '<br>';
+    html += 'Atendido por: ' + (p.atendido || "Sin asignar") + '<br>';
+    html += '<div class="order-actions">';
+    html += '<button onclick="setEstado(' + p.id + ',\'en proceso\')">En proceso</button>';
+    html += '<button onclick="setTiempo(' + p.id + ')">Tiempo</button>';
+    html += '<button onclick="setEstado(' + p.id + ',\'listo\')">Listo</button>';
+    html += '<button class="danger" onclick="cancelarPedido(' + p.id + ')">Cancelar</button>';
+    html += '</div>';
+    html += '</div>';
+  });
+  c.innerHTML = html;
 }
-
-function setEstado(id, estado) {
-  const p = pedidos.find(x => x.id === id);
-  if (p) { p.estado = estado; p.atendido = usuario; toast("Actualizado"); renderOrders(); }
+function setEstado(id, estado){
+  const p = pedidos.find(function(x){
+    return x.id === id;
+  });
+  if(p){
+    p.estado = estado;
+    p.atendido = usuario;
+    toast("Actualizado");
+    renderOrders();
+  }
 }
-function setTiempo(id) {
+function setTiempo(id){
   const t = prompt("Tiempo estimado en minutos:");
-  if (!t) return;
-  const p = pedidos.find(x => x.id === id);
-  if (p) { p.tiempo = t + " min"; p.estado = "en proceso"; p.atendido = usuario; toast("Tiempo asignado"); renderOrders(); }
+  if(!t) return;
+  const p = pedidos.find(function(x){
+    return x.id === id;
+  });
+  if(p){
+    p.tiempo = t + " min";
+    p.estado = "en proceso";
+    p.atendido = usuario;
+    toast("Tiempo asignado");
+    renderOrders();
+  }
 }
-function cancelarPedido(id) {
-  if (!confirm("¿Cancelar este pedido?")) return;
-  const p = pedidos.find(x => x.id === id);
-  if (p) { p.estado = "cancelado"; toast("Pedido cancelado"); renderOrders(); }
+function cancelarPedido(id){
+  if(!confirm("¿Cancelar este pedido?")) return;
+  const p = pedidos.find(function(x){
+    return x.id === id;
+  });
+  if(p){
+    p.estado = "cancelado";
+    toast("Pedido cancelado");
+    renderOrders();
+  }
 }
-
-// ═══════════════════════════════════════════════
-//  PANEL DUEÑO
-// ═══════════════════════════════════════════════
-function renderSummary() {
-  const activos = pedidos.filter(p => p.estado !== "cancelado");
-  $("summary-box").innerHTML = `
-    <div class="stat"><h3>${pedidos.length}</h3><p>Total pedidos</p></div>
-    <div class="stat"><h3>${pedidos.filter(p=>p.estado==="nuevo").length}</h3><p>Nuevos</p></div>
-    <div class="stat"><h3>${pedidos.filter(p=>p.estado==="en proceso").length}</h3><p>En proceso</p></div>
-    <div class="stat"><h3>${pedidos.filter(p=>p.estado==="listo").length}</h3><p>Listos</p></div>
-    <div class="stat"><h3>${money(activos.reduce((s,p)=>s+p.total,0))}</h3><p>Ventas</p></div>`;
-
+function renderSummary(){
+  const activos = pedidos.filter(function(p){
+    return p.estado !== "cancelado";
+  });
+  const ventas = activos.reduce(function(s,p){
+    return s + p.total;
+  }, 0);
+  $("summary-box").innerHTML =
+    '<div class="stat"><h3>' + pedidos.length + '</h3><p>Total pedidos</p></div>' +
+    '<div class="stat"><h3>' + pedidos.filter(function(p){return p.estado === "nuevo";}).length + '</h3><p>Nuevos</p></div>' +
+    '<div class="stat"><h3>' + pedidos.filter(function(p){return p.estado === "en proceso";}).length + '</h3><p>En proceso</p></div>' +
+    '<div class="stat"><h3>' + pedidos.filter(function(p){return p.estado === "listo";}).length + '</h3><p>Listos</p></div>' +
+    '<div class="stat"><h3>' + money(ventas) + '</h3><p>Ventas</p></div>';
   const ao = $("all-orders");
-  if (!pedidos.length) { ao.innerHTML = "<p>No hay pedidos todavía.</p>"; return; }
-  ao.innerHTML = [...pedidos].reverse().map(p => `
-    <div class="order">
-      <strong>Pedido #${p.id} — ${p.hora}</strong> &nbsp;
-      <span class="badge ${p.estado==="listo"?"yes":p.estado==="cancelado"?"no":"badge"}" style="background:#fff3cd;color:#856404">
-        ${p.estado}
-      </span><br>
-      Cliente: ${p.nombre} | Tipo: ${p.delivery} | Pago: ${p.payment}<br>
-      <div class="oi" style="margin-top:6px">
-        <ul>${p.items.map(i=>`<li><span>${i.qty}× ${i.name}</span><span>${money(i.price*i.qty)}</span></li>`).join("")}</ul>
-        <div style="text-align:right;font-weight:bold;color:#e8491d;margin-top:4px">Total: ${money(p.total)}</div>
-      </div>
-    </div>`).join("");
+  if(!pedidos.length){
+    ao.innerHTML = "<p>No hay pedidos todavía.</p>";
+    return;
+  }
+  let html = "";
+  pedidos.slice().reverse().forEach(function(p){
+    let itemsHtml = "";
+    p.items.forEach(function(i){
+      itemsHtml += "<li><span>" + i.qty + "x " + i.name + "</span><span>" + money(i.price * i.qty) + "</span></li>";
+    });
+    html += '<div class="order">';
+    html += '<strong>Pedido #' + p.id + " — " + p.hora + '</strong> ';
+    html += '<span class="badge" style="background:#fff3cd;color:#856404">' + p.estado + '</span><br>';
+    html += 'Cliente: ' + p.nombre + ' | Tipo: ' + p.delivery + ' | Pago: ' + p.payment + '<br>';
+    html += '<div class="oi" style="margin-top:6px"><ul>' + itemsHtml + '</ul>';
+    html += '<div style="text-align:right;font-weight:bold;color:#e8491d;margin-top:4px">Total: ' + money(p.total) + '</div></div>';
+    html += '</div>';
+  });
+  ao.innerHTML = html;
+}
+function renderCreator(){
+  const activos = pedidos.filter(function(p){
+    return p.estado !== "cancelado";
+  });
+  const ventas = activos.reduce(function(s,p){
+    return s + p.total;
+  }, 0);
+  $("creator-box").innerHTML =
+    '<div class="stat"><h3>' + menu.length + '</h3><p>Platos en menú</p></div>' +
+    '<div class="stat"><h3>' + menu.filter(function(m){return m.available;}).length + '</h3><p>Disponibles</p></div>' +
+    '<div class="stat"><h3>' + pedidos.length + '</h3><p>Pedidos registrados</p></div>' +
+    '<div class="stat"><h3>' + money(ventas) + '</h3><p>Ventas activas</p></div>';
+  $("cr-name").innerText = NOMBRE;
+  $("cr-cocina").innerText = COCINERO_EMAIL;
+  $("cr-dueno").innerText = DUENO_EMAIL;
+  $("cr-creador").innerText = CREADOR_EMAIL;
 }
 </script>
-
 </body>
 </html>
